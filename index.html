@@ -20,7 +20,7 @@
     <header class="header flex-center">
         <div class="top-row flex-center">
             <div class="logo-container">
-            <img src="/images/logo.png" alt="Лого.png" class="logo ml-30"/>
+                <img src="/images/logo.png" alt="Лого.png" class="logo ml-30"/>
             </div>
             
             <nav class="nav">
@@ -41,7 +41,9 @@
 
             <div class="icons-container pc-vers">
                     <div class="icons-wrapper flex-center">
-                        <img src="/images/user.png" alt="Користувач.png" class="img"/>
+                        <a class="a-wrap" href="user.html">
+                            <img src="/images/user.png" alt="Користувач.png" class="img"/>
+                        </a>
                     </div>
                     <div class="icons-wrapper flex-center">
                         <img src="/images/cart.png" alt="Кошик.png" class="img"/>
@@ -58,7 +60,7 @@
     </header>
 
     <main>
-        <section>
+        <section class="main-page">
             <div class="block-img-cover bg-cover">
                 <h1 class="block-img-cover_title">Найсмачніші морепродукти</h1>
                 <button class="btn btn--img-cover">Натисніть щоб побачити пропозиції...</button>
@@ -125,14 +127,6 @@
             <a>Контакти</a>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
-<script>
-    const burgerMenu = document.querySelector('.burger-wrap');
-    const nav = document.querySelector('.nav');
-
-    burgerMenu.addEventListener('click', () => {
-        nav.classList.toggle('open');
-    });
-</script>
 </html>

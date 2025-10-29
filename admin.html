@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFresh | Адмін-панель</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <div class="sidebar" style="display: none;">
+        <h2>Адмін-панель</h2>
+        <ul>
+            <li><a href="#dashboard">Панель</a></li>
+            <li><a href="#users">Користувачі</a></li>
+            <li><a href="#addproduct">Додати продукти</a></li>
+            <li><a href="#products">Продукти</a></li>
+            <li><a href="#updateproduct">Оновити продукти</a></li>
+            <li><a href="#deleteproduct">Видалити продукти</a></li>
+        </ul>
+    </div>
+
+    <header> 
+        <div class="admin-header" style="display: none;">
+            <a href="index.html">Вийти</a>
+        </div>
+        
+        <div id="loginForm" class="login-wrap" >
+            <h2>Вітаю!</h2>
+            <div class="admin-login">
+                <input type="text" id="adminName" placeholder="Логін">
+                <input type="password" id="adminPass" placeholder="Пароль">
+                <button onclick="loginAdmin()">Увійти</button>
+                <p id="adminError" style="color:red; display:none;">Невірний логін або пароль!</p>
+            </div>
+        </div>
+    </header> 
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFresh | Мій профіль</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
+</head>
+<body class="bg-cover">
+    <section>
+        <div id="loginForm" class="login-wrap">
+            <h2>Вхід у профіль</h2>
+            <input type="text" id="username" placeholder="Логін">
+            <input type="password" id="password" placeholder="Пароль">
+            <button onclick="loginUser()">Увійти</button>
+            <p id="loginMessage" style="color:red; display:none;">Невірний логін або пароль!</p>
+        </div>
+    </section>
+
+    <header class="header flex-center" style="display:none;">
+        <div class="top-row flex-center">
+            <div class="logo-container">
+                <img src="/images/logo.png" alt="Лого.png" class="logo ml-30"/>
+            </div>
+
+            <nav class="nav">
+                <ul>
+                    <li class="menu-item"><a href="index.html">Головна</a></li>
+                </ul>
+            </nav>
+
+            <div class="search-li">
+                <form class="search" method="get">
+                    <input type="text" id="search" name="search" placeholder="Пошук товарів...">
+                    <button class="btn btn--search" type="submit">Знайти</button>
+                </form>
+            </div>
+
+            <div class="icons-container">
+                <div class="icons-wrapper flex-center">
+                    <img src="/images/cart.png" alt="Кошик.png" class="img"/>
+                </div>
+                <div class="icons-wrapper flex-center">
+                    <a class="a-wrap" href="index.html"><img src="/images/logout.png" alt="Вийти.png" class="img"/></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-page">
+        <section class="profile-info">
+        <h1>Мій профіль</h1>
+        <div class="profile-card">
+            <p><strong>Ім’я:</strong> Іван</p>
+            <p><strong>Email:</strong> test@example.com</p>
+            <p><strong>Дата реєстрації:</strong> 12.09.2024</p>
+            <button class="btn edit-btn" onclick="alert('Редагування профілю (імітація)')">Редагувати</button>
+        </div>
+        </section>
+        <section class="orders-section">
+        <h2>Історія замовлень</h2>
+        <div class="products-table">
+            <div class="product">
+                <img class="poster" src="/images/product-losos-file.jpg" alt="Лосось філе">
+                <h3>Лосось філе</h3>
+                <p>Куплено 15.10.2024 — 1 кг за 755 грн</p>
+            </div>
+            <div class="product">
+                <img class="poster" src="/images/product-kachina-nijka.jpg" alt="kachina-nijka.png">
+                <h3>Качина ніжка</h3>
+                <p>(в упак 2шт); 315,00грн/кг</p>
+            </div>
+            <div class="product">
+                <img class="poster" src="/images/product-file-kachine.jpg" alt="product-file-kachine.png">
+                <h3>Філе качине</h3>
+                <p>(в упак 2шт);  468,00грн/кг</p>
+            </div>
+            <div class="product">
+                <img class="poster" src="/images/product-ikra-foreli.jpg" alt="ikra-foreli.png">
+                <h3>Ікра форелі</h3>
+                <p>0,250г: 950,00грн<br>0,400г: 1520,00грн</p>
+            </div>
+        </div>
+        </section>
+    </main>
+</body>
+</html>

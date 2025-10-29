@@ -111,11 +111,12 @@ input {
     border-radius: 15px;
 }
 .btn {
-  border: none;
-  border-radius: 35px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
+    margin: auto;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
 }
 .btn--search {
     width: 100px;
@@ -124,6 +125,7 @@ input {
     color: black;
 }
 
+/* Навігація + футер */
 .nav {
     display: flex;
 }
@@ -151,6 +153,7 @@ input {
     background: #C2DC90;
 }
 
+/* Іконки */
 .block-img-cover {
     opacity: 100%;
     background-image: url(/images/test.jpg);
@@ -181,16 +184,25 @@ input {
     color: #000000;
 }
 
-.products-table {
+/* Таблиці з продуктами */
+.main-page .products-table {
   display: flex;
   flex-wrap: wrap;  
   gap: 20px;        
   justify-content: center;
 }
 .product {
-  flex: 1 1 250px;  
-  max-width: 350px;
-  text-align: center;
+    flex: 1 1 250px;  
+    max-width: 350px;
+    text-align: center;
+}
+.orders-section .product {
+    background-color: #DCF1FF;
+    border-radius: 15px;
+}
+.main-page .poster {
+    border: 1px solid #ccc;
+    background: #fff;
 }
 .poster {
     padding: 20px 0 20px 0;
@@ -198,9 +210,7 @@ input {
     height: 250px;          
     object-fit: contain;   
     object-position: center;
-    border: 1px solid #ccc; 
-    border-radius: 8px;
-    background: #fff;       
+    border-radius: 8px;      
 }
 .product h3 {
     font-size: 20px;
@@ -210,7 +220,13 @@ input {
     font-size: 18px;
     margin-block-start: 0em;
 }
+.orders-section .products-table {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
 
+/* Футер */
 .footer {
     padding: 50px 0 20px 0;
     text-align: center;
@@ -235,6 +251,7 @@ input {
     font-size: 15px;
 }
 
+/* Бургер-меню */
 .burger-menu {
     width: 30px;
     height: 22px;
@@ -264,11 +281,108 @@ input {
 .menu-item {
     display: block;
 }
+.a-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 35px;        
+}
 
+/* Позиції хедера на екрані */
 .logo-container   { order: 1; }
 .nav              { order: 2; flex: 1; }
 .search-li        { order: 3; }
 .icons-container  { order: 4; }         
+
+/* ---------- Profile ---------- */
+#user-header {
+    display: none;
+}
+.profile-page {
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 60px 80px;
+  box-sizing: border-box;
+}
+.profile-info {
+  flex: 1;
+  max-width: 350px;
+}
+.profile-info h1 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.profile-card {
+  background-color: #b9c8d3;
+  border-radius: 35px;
+  padding: 25px 30px;
+  line-height: 1.8;
+}
+.edit-btn {
+  display: block;
+  background-color: #c2dc90;
+  width: 120px;
+  height: 40px;
+}
+
+/* ---------- Orders ---------- */
+.orders-section {
+  flex: 2;
+  background-color: #b9c8d3;
+  border-radius: 35px;
+  padding: 25px 30px;
+}
+.orders-section h2 {
+  text-align: center;
+  background-color: #e1e4dd;
+  padding: 8px 20px;
+  border-radius: 20px;
+  width: fit-content;
+  margin: 0 auto 25px;
+  font-size: 20px;
+}
+
+.login-wrap {
+  width: 300px;
+  margin: 100px auto;
+  text-align: center;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.login-wrap input {
+  width: 90%;
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.login-wrap button {
+  background: #0066cc;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 768px) {
+  .profile-page {
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-info, .orders-section {
+    width: 100%;
+    max-width: 600px;
+  }
+}
 
 @media screen and (max-width: 768px) {
     .logo-container { order: 1; }
