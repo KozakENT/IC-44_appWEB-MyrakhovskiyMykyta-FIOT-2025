@@ -296,7 +296,7 @@ input {
 .search-li        { order: 3; }
 .icons-container  { order: 4; }         
 
-/* ---------- Profile ---------- */
+/* Profile  */
 #user-header {
     display: none;
 }
@@ -329,7 +329,7 @@ input {
   height: 40px;
 }
 
-/* ---------- Orders ---------- */
+/* Orders */
 .orders-section {
   flex: 2;
   background-color: #b9c8d3;
@@ -371,8 +371,7 @@ input {
   cursor: pointer;
 }
 
-
-/* ---------- Responsive ---------- */
+    
 @media screen and (max-width: 768px) {
   .profile-page {
     flex-direction: column;

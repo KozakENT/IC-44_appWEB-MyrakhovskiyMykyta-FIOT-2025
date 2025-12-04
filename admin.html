@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlyFresh | Адмін-панель</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin.css">
-    <script src="main.js"></script>
+    <link rel="stylesheet" href="src/admin.css">
+    <script src="src/admin.crud/admin.js" defer></script>
 </head>
 <body>
     <div class="sidebar" style="display: none;">
@@ -27,17 +26,61 @@
     <header> 
         <div class="admin-header" style="display: none;">
             <a href="index.html">Вийти</a>
-        </div>
+
+             <div class="section addproduct" style="display: none;">
+                <form class="addproduct" method="post">
+                    <input type="text" id="name" name="name" placeholder="Введіть назву">
+                    <input type="number" id="cost" name="cost" placeholder="Введіть ціну">
+                    <input type="text" id="description" name="description" placeholder="Введіть опис">
+                    <input type="text" id="category" name="category" placeholder="Введіть категорію">
+                    <input type="text" id="photo" name="photo" placeholder="Введіть посилання на фото">
+                    <button onclick="createProduct(event)" class="btn">Створити</button>
+                </form>
+            </div>
+
+            <div class="section products" style="display: none;">
+                <form class="products" method="get">
+                    <button onclick="readProduct(event)" class="btn">Відобразити список</button>
+                    <div class="products-grid" id="products-table">
+                    <!-- Таблиця -->
+                    </div>
+                </form>
+            </div> 
+
+            <div class="section updateproduct" style="display: none;">
+                <form class="updateproduct" method="post">
+                    <input type="number" id="id" name="id" placeholder="Введіть ID товару">
+        
+                    <select name="field" id="field">
+                        <option value="ProductName">Назва</option>
+                        <option value="ProductCost">Ціна</option>
+                        <option value="ProductDescription">Опис</option>
+                        <option value="ProductCategory">Категорія</option>
+                        <option value="ProductPhoto">Фото</option>
+                    </select>
+        
+                    <input type="text" id="value" name="value" placeholder="Нове значення">
+                    <button type="button" onclick="updateProduct(event)" class="btn btn--update">Оновити</button>
+                </form>
+            </div>
+
+            <div class="section deleteproduct" style="display: none;">
+                <form class="deleteproduct" method="delete">
+                    <input type="number" id="ProductId" name="ProductId" placeholder="Введіть ID товару">
+                    <button onclick="deleteProduct(event)" class="btn btn--delete">Видалити</button>
+                </form>
+            </div>
+        </div> 
         
         <div id="loginForm" class="login-wrap" >
             <h2>Вітаю!</h2>
             <div class="admin-login">
                 <input type="text" id="adminName" placeholder="Логін">
                 <input type="password" id="adminPass" placeholder="Пароль">
-                <button onclick="loginAdmin()">Увійти</button>
+                <button class="btn" onclick="loginAdmin()">Увійти</button>
                 <p id="adminError" style="color:red; display:none;">Невірний логін або пароль!</p>
             </div>
         </div>
     </header> 
 </body>
-</html>
+</html> 

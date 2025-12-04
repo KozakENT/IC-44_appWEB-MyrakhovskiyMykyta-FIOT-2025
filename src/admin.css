@@ -99,8 +99,46 @@
             border-radius: 5px;
             outline: none;
         }
+        
+        .addproduct form input, .updateproduct form input, .deleteproduct form input {
+            height: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: none;
+        }
+        
+        .updateproduct select {
+            height: 35px;
+            border-radius: 20px;
+            text-align: center;
+            border: none;
+        } 
 
-        .admin-login button {
+        .addproduct form, .products, .updateproduct form, .deleteproduct form {
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
+            flex-direction: column;
+            width: 300px;
+            gap: 10px;
+        }
+
+        .addproduct form button {
+            height: 35px;
+            border-radius: 20px;
+            border: none;
+            background-color: white;
+            color: black;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .addproduct form button:hover {
+            background-color: #10b981;
+        }   
+
+        .btn {
             padding: 10px;
             background-color: #10b981;
             color: white;
@@ -111,6 +149,41 @@
             transition: background-color 0.3s ease;
         }
 
-        .admin-login button:hover {
+        .btn:hover {
             background-color: #0d946d;
+        }
+
+        .product-card {
+            flex: 1 1 250px;  
+            max-width: 350px;
+            text-align: center;
+            background-color: #DCF1FF;
+            border-radius: 15px;
+        }
+        .product-card img {
+            padding: 20px 0 20px 0;
+            width: 100%;
+            height: 250px;          
+            object-fit: contain;   
+            object-position: center;
+            border-radius: 8px;      
+        }
+        .product-card h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .product-card p {
+            font-size: 18px;
+            margin-block-start: 0em;
+        }
+        .products-grid {
+            margin-left: 30px;
+            max-width: 1000px;
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: 250px;
+            grid-template-rows: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 20px;
+            justify-content: center; 
         }
