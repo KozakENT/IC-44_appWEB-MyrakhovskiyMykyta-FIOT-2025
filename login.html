@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFresh | Адмін-панель</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles.css">
+    <script src="src/auth/login.js" defer></script>
+</head>
+<body>
+    <header> 
+    <div id="loginForm" class="login-wrap" >
+            <h2>Вітаю!</h2>
+            <form>
+                <input id="username" type="text" placeholder="Username" />
+                <input id="password" type="password" placeholder="Password" />
+                <button type="button" onclick="loginUser(event)">Увійти</button>
+            </form>
+            <p id="error"></p>
+        </div>
+        </header> 
+</body>

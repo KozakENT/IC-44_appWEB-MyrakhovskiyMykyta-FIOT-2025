@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFresh | Адмін-панель</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles.css">
+    <script src="src/user.auth/user.js" defer></script>
+</head>
+<body>
+    <header> 
+    <div id="registrateForm" class="registrate-wrap" >
+            <h2>Вітаю! Зареєструйте новий аккаунт або увійдіть якщо вже маєте.</h2>
+            <form>
+                <input id="username" type="text" placeholder="Username" />
+                <input id="phoneNumber" type="text" placeholder="Phone Number" />
+                <input id="email" type="email" placeholder="Email" />
+                <input id="password" type="password" placeholder="Password" />
+                <button type="button" onclick="addNewAccount(event)">Створити</button>
+                
+            </form>
+            <p id="error"></p>
+            <br>
+            <button type="button" onclick="window.location.href='login.html'">Я вже зареєстрований</button>
+        </div>
+    </header> 
+</body>

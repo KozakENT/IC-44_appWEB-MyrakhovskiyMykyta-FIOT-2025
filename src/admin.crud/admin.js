@@ -1,22 +1,19 @@
-function loginAdmin() {
-    const login = document.getElementById('adminName').value.trim();
-    const pass = document.getElementById('adminPass').value.trim();
-    
-    if (login === "admin" && pass === "qwerty") {
-        document.getElementById("loginForm").style.display = "none";
-        document.querySelector(".sidebar").style.display = "block";
-        document.querySelector(".admin-header").style.display = "block";
-    } else {
-        const msg = document.getElementById("adminError");
-        msg.style.display = "block";
-        msg.textContent = "Невірний логін або пароль!";
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    const sidebarLinks = document.querySelectorAll('.sidebar a');
-    const adminHeader = document.querySelector('.admin-header');
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+        // Если токена нет - редирект на страницу логина
+        window.location.href = '/login.html';
+        return;
+    }
 
+    const sidebar = document.querySelector('.sidebar');
+    const adminHeader = document.querySelector('.admin-header');
+    
+    if (sidebar) sidebar.style.display = 'block';
+    if (adminHeader) adminHeader.style.display = 'block';
+
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
     const sections = adminHeader.querySelectorAll('.section');
 
     function hideAllSections() {
@@ -35,11 +32,25 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!targetSection) return;
 
             hideAllSections();
-            adminHeader.style.display = 'block';
             targetSection.style.display = 'block';
         });
     });
 });
+
+const token = localStorage.getItem("token");
+    if (!token) window.location.href = "/login.html";
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+
+    if (payload.role !== "Admin") {
+        window.location.href = "/user.html";
+    }
+
+function logout(event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/index.html';
+}
 
 function createProduct(event) {
     event.preventDefault(); 

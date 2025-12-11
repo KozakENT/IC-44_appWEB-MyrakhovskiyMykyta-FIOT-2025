@@ -301,14 +301,14 @@ input {
     display: none;
 }
 .profile-page {
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
   padding: 60px 80px;
   box-sizing: border-box;
 }
-.profile-info {
+.profile-info { 
   flex: 1;
   max-width: 350px;
 }
@@ -346,8 +346,8 @@ input {
   font-size: 20px;
 }
 
-.login-wrap {
-  width: 300px;
+.registrate-wrap, .login-wrap {
+  width: 700px;
   margin: 100px auto;
   text-align: center;
   background: #f9f9f9;
@@ -355,14 +355,14 @@ input {
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-.login-wrap input {
+.registrate-wrap input, .login-wrap input {
   width: 90%;
   margin: 8px 0;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
-.login-wrap button {
+.registrate-wrap button, .login-wrap button {
   background: #0066cc;
   color: white;
   padding: 8px 16px;

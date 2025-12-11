@@ -25,7 +25,7 @@
 
     <header> 
         <div class="admin-header" style="display: none;">
-            <a href="index.html">Вийти</a>
+            <a href="#" onclick="logout(event)">Вийти</a>
 
              <div class="section addproduct" style="display: none;">
                 <form class="addproduct" method="post">
@@ -71,16 +71,6 @@
                 </form>
             </div>
         </div> 
-        
-        <div id="loginForm" class="login-wrap" >
-            <h2>Вітаю!</h2>
-            <div class="admin-login">
-                <input type="text" id="adminName" placeholder="Логін">
-                <input type="password" id="adminPass" placeholder="Пароль">
-                <button class="btn" onclick="loginAdmin()">Увійти</button>
-                <p id="adminError" style="color:red; display:none;">Невірний логін або пароль!</p>
-            </div>
-        </div>
     </header> 
 </body>
 </html> 
