@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
      <link rel="stylesheet" href="src/styles.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlyFresh | Інтернет-магазин</title>
@@ -19,8 +20,8 @@
 <body class="bg-cover">
     <header class="header flex-center">
         <div class="top-row flex-center">
-            <div class="logo-container">
-                <img src="/images/logo.png" alt="Лого.png" class="logo ml-30"/>
+            <div class="logo-container flex-center">
+                <img src="/images/logo.png" alt="Лого.png" class="logo"/>
             </div>
             
             <nav class="nav">
@@ -32,27 +33,27 @@
             </ul>
             </nav>
 
-            <div class="search-li">
-            <form class="search" method="get">
-                <input type="text" id="search" name="search" placeholder="Я шукаю...">
-                <button class="btn btn--search" type="submit">Знайти</button>
-            </form>
-            </div>
-
             <div class="icons-container pc-vers">
-                    <div class="icons-wrapper flex-center">
-                        <a class="a-wrap" href="registrate.html">
-                            <img src="/images/user.png" alt="Користувач.png" class="img"/>
-                        </a>
+                    <div class="search-li">
+                        <form class="search" method="get">
+                            <input type="text" id="search" name="search" placeholder="Я шукаю...">
+                            <button class="btn btn--search" type="submit" onclick="doSearch(event)">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
                     </div>
+
+                    <a href="registrate.html" class="icons-wrapper flex-center a-reset">
+                        <i class="fa fa-user"></i>
+                    </a>
+
                     <div class="icons-wrapper flex-center">
-                        <img src="/images/cart.png" alt="Кошик.png" class="img"/>
+                        <i class="fa fa-cart-arrow-down"></i>
                     </div>
-                    <div class="burger-wrap">
+                    
+                    <div class="icons-wrapper burger-visible flex-center">
                         <div class="burger-menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <i class="fa fa-bars"></i>
                     </div>
                 </div>
             </div>
@@ -62,8 +63,8 @@
     <main>
         <section class="main-page">
             <div class="block-img-cover bg-cover">
-                <h1 class="block-img-cover_title">Найсмачніші морепродукти</h1>
-                <button class="btn btn--img-cover">Натисніть щоб побачити пропозиції...</button>
+                <h1 class="block-img-cover_title">Свіжа риба з доставкою по всій Україні!</h1>
+                <button class="btn btn--img-cover">Перейти до каталогу..</button>
             </div>
             <h2 id="catalog-selection" >Найпопулярніші категорії</h2>
             <br>
