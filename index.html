@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
      <link rel="stylesheet" href="src/styles.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <script src="https://kit.fontawesome.com/842793bbb5.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Mykyta Myrakhovskiy">
     <title>OnlyFresh | Інтернет-магазин</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,38 +20,48 @@
 <body class="bg-cover">
     <header class="header flex-center">
         <div class="top-row flex-center">
+            <nav class="nav">
+            <ul>
+                <li class="nav-item"><a href="catalog.html">Каталог</a></li>
+                <li class="nav-item"><a href="#delivery">Умови доставки</a></li>
+                <li class="nav-item"><a href="#about-us">Про нас</a></li>
+            </ul>
+            <div class="nav-item">
+                <a href="registrate.html" class="user-container icon-size flex-center a-reset">
+                    <p>Особистий кабінет <i class="fa fa-user"></i></p>
+                </a>
+            </div>
+            </nav>
+        </div>
+
+        <div class="under-row flex-center">
             <div class="logo-container flex-center">
                 <img src="/images/logo.png" alt="Лого.png" class="logo"/>
             </div>
-            
-            <nav class="nav">
-            <ul>
-                <li class="menu-item"><a href="#catalog-selection">Каталог</a></li>
-                <li class="menu-item"><a href="#delivery">Доставка</a></li>
-                <li class="menu-item"><a href="#quality-guarantee">Гарантія якості</a></li>
-                <li class="menu-item"><a href="#about-us">Про нас</a></li>
-            </ul>
-            </nav>
 
-            <div class="icons-container pc-vers">
-                    <div class="search-li">
-                        <form class="search" method="get">
-                            <input type="text" id="search" name="search" placeholder="Я шукаю...">
-                            <button class="btn btn--search" type="submit" onclick="doSearch(event)">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </form>
-                    </div>
+            <div class="search-li">
+                <form class="search" method="get">
+                    <input type="text" id="search" name="search" placeholder="Я шукаю...">
+                        <button class="btn btn--search" type="submit" onclick="doSearch(event)">
+                            <i class="fa fa-search"></i>
+                        </button>
+                </form>
+            </div>
 
-                    <a href="registrate.html" class="icons-wrapper flex-center a-reset">
-                        <i class="fa fa-user"></i>
-                    </a>
+            <div class="phone-container">
+                    <span class="flex-center">
+                        <img src="https://i.ibb.co/WvWLg2ZH/image-88.png" alt="">
+                        <p>+380XXXXXXXXX</p>
+                    </span>
+            </div>
 
+            <div class="icons-container">
                     <div class="icons-wrapper flex-center">
-                        <i class="fa fa-cart-arrow-down"></i>
+                        <img src="https://i.ibb.co/G412WkFT/cart.png" alt="">
+                        <p>Мій кошик</p>
                     </div>
                     
-                    <div class="icons-wrapper burger-visible flex-center">
+                    <div class="icons-wrapper icon-size burger-visible flex-center">
                         <div class="burger-menu">
                         <i class="fa fa-bars"></i>
                     </div>
@@ -128,6 +138,6 @@
             <a>Контакти</a>
         </div>
     </footer>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="src/pages/main.js"></script>
 </body>
 </html>

@@ -88,55 +88,6 @@ function createProduct(event) {
     });
 }
 
-function readProduct(event) {
-    event.preventDefault();
-    
-    fetch('http://localhost:3000/api/products', {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(res => res.json())
-    .then(products => {
-        displayProducts(products);
-        console.log("Продукти отримано:", products);
-    })
-    .catch(err => {
-        console.error("Fetch error:", err);
-        alert("Помилка при отриманні продуктів!");
-    });
-}
-
-function displayProducts(products) {
-    const grid = document.getElementById('products-table');
-    
-    // Очищаємо попередні дані
-    grid.innerHTML = '';
-    
-    if (products.length === 0) {
-        grid.innerHTML = '<p>Немає продуктів для відображення</p>';
-        return;
-    }
-    
-    // Створюємо картки для кожного продукту
-    products.forEach(product => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-            <img src="${product.ProductPhoto}" alt="${product.ProductName}">
-            <h3>${product.ProductName}</h3>
-            <p><strong>Ціна:</strong> ${product.ProductCost} грн</p>
-            <p><strong>Категорія:</strong> ${product.ProductCategory}</p>
-            <p>${product.ProductDescription}</p>
-            <p><small>ID: ${product.ProductId}</small></p>
-        `;
-        grid.appendChild(card);
-    });
-    
-    alert("Продукти завантажено!");
-}
-
 function deleteProduct(event) {
     event.preventDefault();
 

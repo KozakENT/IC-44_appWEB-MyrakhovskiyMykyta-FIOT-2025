@@ -5,9 +5,121 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Mykyta Myrakhovskiy">
         <title>OnlyFresh | Каталог</title>
+        <link rel="stylesheet" href="src/styles.css">
+        <script src="https://kit.fontawesome.com/842793bbb5.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     </head>
-    <body>
-        <p>Тут буде каталог</p>
-        <p>Новий параграф</p>
+<body>
+    <header class="header flex-center">
+        <div class="top-row flex-center">
+            <nav class="nav">
+            <ul>
+                <li class="nav-item"><a href="catalog.html">Каталог</a></li>
+                <li class="nav-item"><a href="#delivery">Умови доставки</a></li>
+                <li class="nav-item"><a href="#about-us">Про нас</a></li>
+            </ul>
+            <div class="nav-item">
+                <a href="registrate.html" class="user-container icon-size flex-center a-reset">
+                    <p>Особистий кабінет <i class="fa fa-user"></i></p>
+                </a>
+            </div>
+            </nav>
+        </div>
+
+        <div class="under-row flex-center">
+            <div class="logo-container flex-center">
+                <img src="/images/logo.png" alt="Лого.png" class="logo"/>
+            </div>
+
+            <div class="search-li">
+                <form class="search" method="get">
+                    <input type="text" id="search" name="search" placeholder="Я шукаю...">
+                        <button class="btn btn--search" type="submit" onclick="doSearch(event)">
+                            <i class="fa fa-search"></i>
+                        </button>
+                </form>
+            </div>
+
+            <div class="phone-container">
+                    <span class="flex-center">
+                        <img src="https://i.ibb.co/WvWLg2ZH/image-88.png" alt="">
+                        <p>+380XXXXXXXXX</p>
+                    </span>
+            </div>
+
+            <div class="icons-container">
+                    <div class="icons-wrapper flex-center">
+                        <img src="https://i.ibb.co/G412WkFT/cart.png" alt="">
+                        <p>Мій кошик</p>
+                    </div>
+                    
+                    <div class="icons-wrapper icon-size burger-visible flex-center">
+                        <div class="burger-menu">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+        <main class="catalog">
+            <div class="hotbar">
+                <div class="hotbar-item icons-wrapper flex-center">
+                    <a href="index.html" class="icons-wrapper flex-center a-reset">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                    <i class="fa-solid fa-angle-right"></i>
+                    <a href="index.html" class="icons-wrapper flex-center a-reset">
+                        <p>Каталог</p>
+                    </a>  
+                    <i class="fa-solid fa-angle-right"></i>
+                    <a href="index.html" class="icons-wrapper flex-center a-reset">
+                        <p>Риба</p>       
+                    </a>  
+                </div>
+                <div class="dropdown">
+                    <button id="sort-filter" class="dropbtn btn">Сортувати за
+                        <i id="dropdown-arrow" class="fa-solid fa-angle-down"></i>
+                    </button>
+                    
+                    <div class="dropdown-content">
+                        <button type="submit" id="option0" class="optionbtn">
+                            <span>Популярне</span>
+                        </button>
+                        <button type="submit" id="option1" class="optionbtn">
+                            <span>Найновіше</span>
+                        </button>
+                        <button type="submit" id="option2"class="optionbtn">
+                            <span>За зниженням ціни</span>
+                        </button>
+                        <button type="submit" id="option3" class="optionbtn">
+                            <span>За зростанням ціни</span>
+                        </button>
+                        <button type="submit" id="option4"class="optionbtn">
+                            <span>За замовчанням</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="catalog-page">
+                <div class="category">
+                    <h2>Категорії</h2>
+                    <ul>
+                        <li>Червона риба</li>
+                        <li>Карасі</li>
+                        <li>Окуні</li>
+                    </ul>
+                </div>
+                <div class="section products">
+                    <div class="products-grid" id="products-table">
+                    <!-- Таблиця -->
+                    </div>
+                </div>
+                </div>
+        </main>
+        <script src="src/pages/catalog.js"></script>
+        <script src="src/pages/usercontent.js"></script>
     </body>
 </html>
+
