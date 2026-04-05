@@ -15,6 +15,9 @@
     <header class="header flex-center">
         <div class="top-row flex-center">
             <nav class="nav">
+            <div id="textlogo-mobile"class="nav-item">
+                <h4>OnlyFresh</h4>
+            </div>
             <ul>
                 <li class="nav-item"><a href="catalog.html">Каталог</a></li>
                 <li class="nav-item"><a href="#delivery">Умови доставки</a></li>
@@ -51,8 +54,8 @@
 
             <div class="icons-container">
                     <div class="icons-wrapper flex-center">
-                        <img src="https://i.ibb.co/G412WkFT/cart.png" alt="">
-                        <p>Мій кошик</p>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p id="cart-text">Мій кошик</p>
                     </div>
                     
                     <div class="icons-wrapper icon-size burger-visible flex-center">
@@ -64,6 +67,11 @@
         </div>
     </header>
         <main class="catalog">
+            <div class="full-filter flex-center">
+                    <button class="btn">Фільтр
+                        <i class="fa-solid fa-filter"></i>
+                    </button>
+                </div>
             <div class="hotbar">
                 <div class="hotbar-item icons-wrapper flex-center">
                     <a href="index.html" class="icons-wrapper flex-center a-reset">
@@ -105,11 +113,39 @@
             <div class="catalog-page">
                 <div class="category">
                     <h2>Категорії</h2>
-                    <ul>
-                        <li>Червона риба</li>
-                        <li>Карасі</li>
-                        <li>Окуні</li>
-                    </ul>
+                    <div class="category-list">
+                        <a class="a-reset checkbox-wrap">
+                            <span class="checkbox">
+                                <i class="fa-regular fa-square js-checkbox-icon"></i>
+                            </span>
+                            <span class="label">
+                                <span class="filter-title">Знижки</span>
+                            </span>
+                            <span class="amount-wrap">
+                                <span class="amount" id="discount-amount"></span>
+                            </span>
+                        </a>
+                        <a class="a-reset checkbox-wrap">
+                            <span class="checkbox">
+                                <i class="fa-regular fa-square fa-square-check js-checkbox-icon"></i>
+                            </span>
+                            <span class="label">
+                                <span class="filter-title">Новинки</span>
+                            </span>
+                        </a>
+                        <h4>Ціна, ₴</h4>
+                        <div>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div>
+                            <input type="range" min="1" max="5000" value="50" class="slider" id="myRange">
+                        </div>
+                        <h4>Розділ</h4>
+                        <div id="category-grid">
+                            
+                        </div>
+                    </div>
                 </div>
                 <div class="section products">
                     <div class="products-grid" id="products-table">
@@ -120,6 +156,7 @@
         </main>
         <script src="src/pages/catalog.js"></script>
         <script src="src/pages/usercontent.js"></script>
+        <script src="src/pages/main.js"></script>
     </body>
 </html>
 

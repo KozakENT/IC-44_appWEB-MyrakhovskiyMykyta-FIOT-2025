@@ -1,4 +1,5 @@
 import { sql, poolPromise } from '../../config/db.js';
+import { client } from '../../redis/connect.js';
 
 export class ProductService {
     async getAllProducts() {
@@ -15,6 +16,39 @@ export class ProductService {
             .query('SELECT * FROM cProduct WHERE ProductId = @ProductId');
 
         return result.recordset[0]; // Вернет один продукт
+    }
+
+    async sortProducts(sortType) {
+        const pool = await poolPromise;
+
+        if (sortType === 'popular') {
+            const ids = await this.popularSort();
+
+            if (ids.length === 0) return [];
+
+            const orderCase = ids
+                .map((id, index) => `WHEN ProductId = ${id} THEN ${index}`)
+                .join(' ');
+
+            const result = await pool.request().query(`
+                SELECT * FROM cProduct 
+                WHERE ProductId IN (${ids.join(',')})
+                ORDER BY CASE ${orderCase} END
+            `);
+
+            return result.recordset;
+        }
+
+        let orderBy = '';
+
+        if (sortType === 'new') orderBy = 'ORDER BY DateChanges DESC';
+        else if (sortType === 'priceASC') orderBy = 'ORDER BY ProductCost ASC' // ціна від низької до великої
+        else if (sortType === 'priceDESC') orderBy = 'ORDER BY ProductCost DESC'; // ціна від великої до низької  
+        else if (sortType === 'default') orderBy = 'ORDER BY ProductId ASC';
+
+        const result = await pool.request().query(`SELECT * FROM cProduct ${orderBy}`);
+
+        return result.recordset;
     }
 
     async createProduct(body) {
@@ -47,7 +81,7 @@ export class ProductService {
                 await pool.request()
                 .input('id', sql.Int, id)
                 .input('value', sql.Decimal(10,2), value)
-                .query(`UPDATE cProduct SET ${field} = @value WHERE ProductId = @id`);
+                .query(`UPDATE cProduct SET ${field} = @value, DateChanges = GETDATE() WHERE ProductId = @id`);
             } catch (err) {
                 console.error('Error updating product: ', err);
                 throw err;
@@ -58,7 +92,7 @@ export class ProductService {
                 await pool.request()
                 .input('id', sql.Int, id)
                 .input('value', sql.NVarChar(255), value)
-                .query(`UPDATE cProduct SET ${field} = @value WHERE ProductId = @id`);
+                .query(`UPDATE cProduct SET ${field} = @value, DateChanges = GETDATE() WHERE ProductId = @id`);
             } catch (err) {
                 console.error('Error updating product: ', err);
                 throw err;
@@ -78,5 +112,21 @@ export class ProductService {
             console.error('Error deleting product: ', err);
             throw err;
         }
+    }
+
+    async buttonBuyCounts(productId) {
+        const pool = await poolPromise;
+
+        // Використовується відсортований список в якому створюються унікальні значення в ключі products, які будуть інкрементуватися на 1
+        const result = await client.zIncrBy('products', 1, productId)
+        await client.expire('products', 86400)
+
+        return true;
+    }
+
+    async popularSort() {
+        // Вивід значень в списці products від 0 до 19го по індексу (Перші 20) 
+        const topIds = await client.sendCommand(['ZREVRANGE', 'products', '0', '19']);
+        return topIds;
     }
 }

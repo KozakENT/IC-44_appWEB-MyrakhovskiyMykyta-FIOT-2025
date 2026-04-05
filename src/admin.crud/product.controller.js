@@ -27,6 +27,17 @@ export const getProductById = async (req, res) => {
   }
 };  
 
+export const sortProducts = async (req, res) => {
+    try {
+        const sortType = req.params.sortType;
+        const products = await productService.sortProducts(sortType);
+        res.json(products);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Sort error' });
+    }
+}
+
 export const createProduct = async (req, res) => {
     try {
         const result = await productService.createProduct(req.body);
@@ -69,3 +80,15 @@ export const deleteProduct = async (req, res) => {
         res.status(500).json({ message: "Delete error", error: err.message });
     }
 };
+
+export const buttonBuyClick = async (req, res) => {
+    const productId = req.params.id;
+    try {
+        await productService.buttonBuyCounts(productId);
+        res.json({ message: 'Counted click on product!'});
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Count error"})
+    }
+}
