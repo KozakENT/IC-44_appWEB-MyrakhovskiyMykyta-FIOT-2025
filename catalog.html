@@ -39,7 +39,7 @@
             <div class="search-li">
                 <form class="search" method="get">
                     <input type="text" id="search" name="search" placeholder="Я шукаю...">
-                        <button class="btn btn--search" type="submit" onclick="doSearch(event)">
+                        <button class="btn btn--search" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                 </form>
@@ -114,32 +114,35 @@
                 <div class="category">
                     <h2>Категорії</h2>
                     <div class="category-list">
-                        <a class="a-reset checkbox-wrap">
-                            <span class="checkbox">
-                                <i class="fa-regular fa-square js-checkbox-icon"></i>
-                            </span>
-                            <span class="label">
-                                <span class="filter-title">Знижки</span>
-                            </span>
-                            <span class="amount-wrap">
-                                <span class="amount" id="discount-amount"></span>
-                            </span>
-                        </a>
-                        <a class="a-reset checkbox-wrap">
-                            <span class="checkbox">
-                                <i class="fa-regular fa-square fa-square-check js-checkbox-icon"></i>
-                            </span>
-                            <span class="label">
-                                <span class="filter-title">Новинки</span>
-                            </span>
-                        </a>
-                        <h4>Ціна, ₴</h4>
-                        <div>
-                            <span></span>
-                            <span></span>
+                        <div class="offer">
+                            <a class="a-reset checkbox-wrap">
+                                <span class="checkbox">
+                                    <i class="fa-regular fa-square js-checkbox-icon"></i>
+                                </span>
+                                <span class="label">
+                                    <span class="filter-title">Знижки</span>
+                                </span>
+                                <span class="amount-wrap">
+                                    <span class="amount" id="discount-amount"></span>
+                                </span>
+                            </a>
                         </div>
-                        <div>
-                            <input type="range" min="1" max="5000" value="50" class="slider" id="myRange">
+                        <h4>Ціна, ₴</h4>
+                        <div class="price-glider">
+                            <div class="price-container">
+                                <input class="min-range" type="number" value="50" min="50" max="4500"></input>
+                                <input class="max-range" type="number" value="4500" min="50" max="4500"></input>
+                                <button id="price-sort-confirm" class="btn">OK</button>
+                            </div>
+                            <div class="slider-container">
+                                <span class="slider-handler" id="slider-handler-left">
+                                    <i class="fa-solid fa-circle-arrow-right"></i>
+                                </span>
+                                <div class="slider-range"></div>
+                                <span class="slider-handler" id="slider-handler-right">
+                                    <i class="fa-solid fa-circle-arrow-left"></i>
+                                </span>
+                            </div>
                         </div>
                         <h4>Розділ</h4>
                         <div id="category-grid">

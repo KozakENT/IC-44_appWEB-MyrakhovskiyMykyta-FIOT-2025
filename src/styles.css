@@ -30,7 +30,7 @@ body {
     padding-top: 90px;
     line-height: 30px;
     position: sticky;
-    background-color: #F1ECDD;
+    background-color: white;
 }
 
 .header {
@@ -42,7 +42,6 @@ body {
     flex-direction: column;
     width: 100%;
     height: 120px;
-    background: #E1E4DD;
     z-index: 100;
 }
 
@@ -58,7 +57,7 @@ body {
 .under-row {
     justify-content: space-around;
     width: 100%;
-    background: #E1E4DD;
+    background: white;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -171,8 +170,8 @@ input {
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
-    color: black;
-    background-color: #D2E3E8;
+    color: white;
+    background-color: #79B3FF;
     border-radius: 10px;
 }
 
@@ -593,16 +592,21 @@ input {
     width: 100%;
     border-radius: 0 10px 0 0;
 }
-.category-list {
-    display: flex;
-    flex-direction: column;
-}
 #category-grid {
     display: flex;
     flex-direction: column;
 }
-.category-list h4 {
-    margin: 3px;
+.category-list h4, h2 {
+    margin: 10px 0 5px 0;
+}
+.checkbox > i{ 
+    color: black;
+}
+.checkbox > .fa-square-check {
+    color: #79B3FF;
+}
+.checkbox > .fa-square-check::before {
+    font-weight: bold;
 }
 .checkbox-wrap {
     cursor: pointer;
@@ -629,23 +633,69 @@ input {
     color: rgb(6, 127, 248);
 }
 
-.slidecontainer {
-  width: 100%; /* Width of the outside container */
-}
-/* The slider itself */
-.slider {
-  width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #404040; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  transition: opacity .2s;
-}
-/* Mouse-over effects */
-.slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
-}
 
+.price-container {
+    display: flex;
+    gap: 5px;
+}
+.category {
+    display: flex;
+    flex-direction: column;
+}
+.price-glider {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.slider-container {
+    width: 175px; 
+    display: flex;
+    align-items: center;
+    height: 26px;
+    position: relative;
+}
+.slider-range {
+    width: 100%;
+    height: 4px;
+    background-color: #79B3FF;;
+}
+.slider-handler {
+    position: absolute;  /* або relative */
+    cursor: grab;
+}
+.slider-handler:focus {
+    background-color: red;
+}
+.slider-handler > i {
+    color:white;
+    background-color: #79B3FF;
+    border: 2px solid #79B3FF;
+    border-radius: 36px;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.price-container > input {
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0, 50%);
+    padding-left: 5px;
+}
+.price-container > button {
+    background-color: white;
+    color: #79B3FF;
+    border: 1px solid #79B3FF;
+    transition: background-color 0.3s;
+}
+.price-container > button:hover {
+    background-color: #79B3FF;
+    color: white;
+}
 
 .hotbar {
     display: flex;
@@ -657,11 +707,17 @@ input {
 }
 .hotbar-item {
     gap: 10px;
+    color: rgb(100, 100, 100);
+}
+.hotbar-item > a > p {
+    margin: 0;
+    font-weight: 400;
+}
+.hotbar-item .fa-solid {
+    --fa-style: 700;
 }
 .dropbtn {
     margin-top: 15px;
-    color: black;
-    background-color: #D2E3E8;
     border-radius: 10px;
     width: 170px;
     height: 50px;
@@ -687,12 +743,12 @@ input {
     transform: rotate(180deg);
 }
 .optionbtn {
-    background-color: #D2E3E8;
+    background-color: #79B3FF;
     border: none;
     padding: 10px 20px;
     text-align: left;
     cursor: pointer;
-    color: black;
+    color: white;
 }
 .optionbtn span {
     transition: color 0.3s;
@@ -781,6 +837,14 @@ input {
     margin-top: 20px;
     justify-content: center;
 }
+.without-products {
+    width: 100%;
+    margin-left: 30px;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+}
+
 
 @media screen and (max-width: 720px) {
     .catalog {

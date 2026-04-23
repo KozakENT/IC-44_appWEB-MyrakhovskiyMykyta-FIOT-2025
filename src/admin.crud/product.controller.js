@@ -92,3 +92,28 @@ export const buttonBuyClick = async (req, res) => {
         res.status(500).json({ message: "Count error"})
     }
 }
+
+export const sortByWord = async (req, res) => {
+    const inputContent = req.params.inputContent;
+    try {
+        const products = await productService.sortByWord(inputContent);
+        res.json(products);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Search input content error" })
+    }
+}
+
+export const sortByPriceSlider = async (req, res) => {
+    const minvalue = Number(req.params.minvalue);
+    const maxvalue = Number(req.params.maxvalue);
+    try {
+        const products = await productService.sortByPrice(minvalue, maxvalue);
+        res.json(products);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Search input content error" })
+    }
+}

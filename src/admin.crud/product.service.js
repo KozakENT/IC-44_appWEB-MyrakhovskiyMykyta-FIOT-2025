@@ -129,4 +129,38 @@ export class ProductService {
         const topIds = await client.sendCommand(['ZREVRANGE', 'products', '0', '19']);
         return topIds;
     }
+
+    async sortByWord(inputContent) {
+        const pool = await poolPromise;
+        try {
+            const result = await pool.request()
+                .input('pattern', sql.NVarChar, `%${inputContent}%`)
+                .query(`SELECT * FROM cProduct
+                        WHERE ProductName LIKE @pattern
+                            OR ProductCategory LIKE @pattern
+                            OR ProductDescription LIKE @pattern`);
+
+            return result.recordset;
+        } catch (err) {
+            console.error('Error searching product: ', err);
+            throw err;
+        }
+    }
+
+    async sortByPrice(minvalue, maxvalue) {
+        const pool = await poolPromise;
+        try {
+            const result = await pool.request()
+            .input('minpara', sql.Decimal(10,2), minvalue)
+            .input('maxpara', sql.Decimal(10,2), maxvalue)
+            .query(`SELECT * FROM cProduct 
+                    WHERE ProductCost >= @minpara AND ProductCost <= @maxpara`)
+
+            return result.recordset;
+        }
+        catch (err) {
+            console.error('Error confirming price-sort', err);
+            throw err;
+        }
+    }
 }

@@ -21,6 +21,18 @@ document.addEventListener('DOMContentLoaded', () => {
         getSorted('default');
     });
     
+    document.querySelector('.search')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const searchValue = document.getElementById('search').value;
+        searchBy(searchValue);
+    });
+
+    document.getElementById('price-sort-confirm')?.addEventListener('click', (e)=> {
+        e.preventDefault();
+        const minvalue = document.querySelector('.min-range').value;
+        const maxvalue = document.querySelector('.max-range').value;
+        sortByPriceSlider(minvalue, maxvalue);
+    });
 });
 
 function readProduct() {
@@ -50,7 +62,7 @@ function displayProducts(products) {
     grid.innerHTML = '';
     
     if (products.length === 0) {
-        grid.innerHTML = '<p>Немає продуктів для відображення</p>';
+        grid.innerHTML = '<p class="without-products">Немає продуктів для відображення</p>';
         return;
     }
     
@@ -172,5 +184,41 @@ function buttonBuyClick(productId) {
     .catch(err => {
         console.error("Fetch error:", err);
         alert("Помилка при рахуванні кліку на продукт!");
+    });
+}
+
+function searchBy(inputContent) {
+    fetch(`http://localhost:3000/api/products/search/${encodeURIComponent(inputContent)}`, {
+        method: 'GET',
+    headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(products => {
+        displayProducts(products);
+        console.log("Продукти відсортовано:", products);
+    })
+    .catch(err => {
+        console.error("Fetch error:", err);
+        alert("Помилка при сортуванні продуктів!");
+    });
+}
+
+function sortByPriceSlider(minvalue, maxvalue) {
+    fetch(`http://localhost:3000/api/products/price/${minvalue}-${maxvalue}`, {
+        method: 'GET',
+    headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(products => {
+        displayProducts(products);
+        console.log("Продукти відсортовано:", products);
+    })
+    .catch(err => {
+        console.error("Fetch error:", err);
+        alert("Помилка при сортуванні продуктів!");
     });
 }
