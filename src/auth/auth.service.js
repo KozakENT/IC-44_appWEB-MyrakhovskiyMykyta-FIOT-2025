@@ -39,7 +39,7 @@ export class AuthService {
     async generateToken(userId, role) {
         return jwt.sign(
             { id: userId, role: role },
-            "SECRET_KEY",
+            process.env.JWT_SECRET,
             { expiresIn: "2h" }
         );
     }

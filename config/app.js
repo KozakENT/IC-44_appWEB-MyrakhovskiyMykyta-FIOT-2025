@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import productRouter from '../src/admin.crud/product.routes.js';
 import authRouter from '../src/auth/auth.router.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 

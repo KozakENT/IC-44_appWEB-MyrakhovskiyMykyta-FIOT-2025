@@ -19,6 +19,10 @@
     color: inherit;
 }
 
+html {
+    font-size: 100%;
+}
+
 html,
 body {
     max-width: 100%;
@@ -117,6 +121,24 @@ body {
     width: 34px;
 }
 
+#open-cart-button {
+    position: relative;
+}
+
+#open-cart-button span {
+    display: none;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: red;
+    height: 2rem;
+    width: 2.4rem;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
 .header .icons-wrapper {
     color: white;
     background-color: #79B3FF;
@@ -168,7 +190,7 @@ input {
     border: none;
     border-radius: 35px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
     color: white;
     background-color: #79B3FF;
@@ -556,7 +578,6 @@ input {
 
 .footer h4 {
     font-weight: bold;
-
 }
 
 .footer a {
@@ -596,7 +617,7 @@ input {
     display: flex;
     flex-direction: column;
 }
-.category-list h4, h2 {
+.category-list h4, .category-list h2 {
     margin: 10px 0 5px 0;
 }
 .checkbox > i{ 
@@ -787,6 +808,10 @@ input[type="number"]::-webkit-inner-spin-button {
     justify-content: flex-end;
     margin-bottom: 6px;
 }
+.product-old-price {
+    font-size: 12px;
+    color: gray;
+}
 .product-image {
     width: 100%;
     height: 200px; /* зона под фото внутри карточки */
@@ -805,7 +830,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 .product-card h3 {
     padding-top: 3px;
-    font-size: 20px;
+    font-size: 1rem;
     font-weight: 600;
 }
 .product-card .product-category, .product-card .av {
@@ -816,7 +841,7 @@ input[type="number"]::-webkit-inner-spin-button {
     color: #028B1B;
     margin-top: 5px;
 }
-.product-card .details-button {
+.product-card .to-cart-button {
     font-weight: 600;
     margin-left: auto;
     margin-right: auto;
@@ -828,7 +853,15 @@ input[type="number"]::-webkit-inner-spin-button {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    transition: 0.3s background-color;
 }
+.product-card .to-cart-button:hover{
+    background-color: #6797d6 ;
+}
+.product-card .in-cart-button {
+    background-color: gray;
+}
+
 .products-grid {
     max-width: 1200px;
     display: grid;
@@ -845,6 +878,136 @@ input[type="number"]::-webkit-inner-spin-button {
     font-weight: bold;
 }
 
+.pop-up-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 9999;
+    background: rgba(0,0,0,0.5);  
+    display: none;
+}
+.cart {
+    display: none;
+}
+.cart .pop-up {
+    position: fixed;  
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 100vh;     
+    overflow-y: auto; 
+    background: white;
+    border-radius: 20px;
+    padding: 0 1rem;
+    z-index: 10000;
+}
+.cart .pop-up h3 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 0 0 0.7rem 0;
+}
+.cart table {
+    width: 100%;
+}
+.cart .pop-up h2 {
+    font-size: 1rem;
+    font-weight: normal;
+}
+.cart-summary {
+    justify-content: flex-end;
+    gap: 0.5rem;
+    text-align: center;
+}
+.cart-summary span {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+.cart-buttons {
+    justify-content: space-between;
+}
+.cart-buttons > .make-order {
+    font-size: 1.3rem;
+    padding: 1rem 2rem;
+    font-weight: bolder;
+    transition: color 0.3s;
+}
+.cart-buttons > .make-order:hover {
+    color: #313436;
+}
+.cart-buttons > .go-back-arrow {
+    border: none;
+    color: black;
+    background-color: white;;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+.cart-buttons > .go-back-arrow:hover {
+    color: #313436;;
+}
+.cart #close-cart {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    cursor: pointer;
+    color: rgb(82, 81, 81);
+}
+
+table {
+    border-collapse: separate;
+    /* Убираем стандартные отступы между ячейками, чтобы строка казалась цельной */
+    border-spacing: 0 10px; /* 10px — отступ между строками, если нужен */
+}
+tbody > tr > td:first-child {
+    border-radius: 20px 0 0 20px;
+    /* Имитация левой, верхней и нижней рамки */
+    box-shadow: inset 1px 1px 0 0 rgba(0, 0, 0, 0.3), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3); 
+
+    padding: 10px 0 10px 20px;
+
+    width: 1%;
+    white-space: nowrap;
+}
+tbody > tr > td {
+    box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.3), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+}
+tbody > tr > td:last-child {
+    border-radius: 0 20px 20px 0;
+    /* Имитация правой, верхней и нижней рамки */
+    box-shadow: inset -1px 1px 0 0 rgba(0, 0, 0, 0.3), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+
+    padding: 10px 10px 10px 0px;
+}
+.image-td {
+    width: 6rem;
+    height: 7rem;
+    display: block;
+}
+.text-td {
+    padding-left: 10px;
+}
+tbody .text-td h2 {
+    color: #0065FC;
+    margin: 0;
+}
+tbody .text-td span {
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+tbody .counter {
+    border: 1px solid #79B3FF;
+    border-radius: 20px;
+    width: fit-content;
+    white-space: nowrap;
+    padding: 0.5rem 0;
+}
+tbody .counter button {
+    color: black;
+    background-color: white;
+    padding: 0 1rem;
+}
 
 @media screen and (max-width: 720px) {
     .catalog {
@@ -900,7 +1063,7 @@ input[type="number"]::-webkit-inner-spin-button {
     .product-card .product-info, .product-price {
         margin-left: 5px;
     }
-    .product-card .details-button {
+    .product-card .to-cart-button {
         width: 100px;
     }
     .product-card {

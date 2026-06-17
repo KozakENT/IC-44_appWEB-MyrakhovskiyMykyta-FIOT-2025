@@ -163,4 +163,33 @@ export class ProductService {
             throw err;
         }
     }
+
+    async addToCart(userId, productId) {
+        const result = await client.hIncrBy(`cart:${userId}`, productId, 1)
+        await client.expire(`cart:${userId}`, 86400)
+
+        return result;
+    }
+
+    async getCart(userId) {
+        const result = await client.hGetAll(`cart:${userId}`)
+        await client.expire(`cart:${userId}`, 86400)
+
+        return result;
+    }
+
+    async delFromCart(userId, productId) {
+        const result = await client.hDel(`cart:${userId}`, productId)
+
+        return result;
+    }
+
+    async removeFromCart(userId, productId) {
+        const result = await client.hIncrBy(`cart:${userId}`, productId, -1)
+        if (result === 0) { await client.hDel (`cart:${userId}`, productId) }
+        await client.expire(`cart:${userId}`, 86400)
+
+        return result;
+    }
+
 }

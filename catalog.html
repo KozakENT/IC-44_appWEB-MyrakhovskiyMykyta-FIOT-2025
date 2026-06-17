@@ -53,9 +53,10 @@
             </div>
 
             <div class="icons-container">
-                    <div class="icons-wrapper flex-center">
+                    <div class="icons-wrapper flex-center" id="open-cart-button">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p id="cart-text">Мій кошик</p>
+                        <span class="amount-display" id="amount-display-text">1</span>
                     </div>
                     
                     <div class="icons-wrapper icon-size burger-visible flex-center">
@@ -155,10 +156,52 @@
                     <!-- Таблиця -->
                     </div>
                 </div>
+            </div>
+            <section class="pop-up-overlay cart flex-center">
+                <div class="pop-up">
+                    <span id="close-cart"><i class="fa-solid fa-xmark"></i></span>
+
+                    <h3>Кошик</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Ваші товари:</td>
+                                <td></td>
+                                <td>Кількість:</td>
+                                <td>Вартість:</td>
+                            </tr>
+                        </thead>
+                    
+                        <tbody id="cart-table-body">
+                        <!-- cart products -->
+                        </tbody>
+                    </table>
+
+                    <div class="cart-summary flex-center">
+                        <h2>Загальна ціна:</h2>
+                        <span id="sum-price"></span>
+                    </div>
+
+                    <div class="cart-buttons flex-center">
+                        <button class="go-back-arrow">
+                            <span><i class="fa-solid fa-arrow-left-long"></i></span>
+                            <span id="go-back">До інших позицій</span>
+                        </button>
+                        <button class="btn make-order">
+                            <span id="make-order">Зробити замовлення</span>
+                        </button>
+                    </div>
+            
+                    <h2>Рекомендуємо спробувати також:</h2>
+                    <div>
+                    <!-- Товари -->    
+                    </div>
                 </div>
+            </section>
         </main>
         <script src="src/pages/catalog.js"></script>
-        <script src="src/pages/usercontent.js"></script>
+        <script src="src/pages/cart.js"></script>
         <script src="src/pages/main.js"></script>
     </body>
 </html>

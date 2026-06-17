@@ -117,3 +117,41 @@ export const sortByPriceSlider = async (req, res) => {
         res.status(500).json({ message: "Search input content error" })
     }
 }
+
+export const addToCart = async (req, res) => {
+    const userId = req.user.id;
+    const productId = req.params.productId;
+    try {
+        const cart = await productService.addToCart(userId, productId);
+        res.json(cart);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Create cart error" })
+    }
+}
+
+export const getCart = async (req, res) => {
+    const userId = req.user.id;
+    try {
+        const cart = await productService.getCart(userId);
+        res.json(cart);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Open cart error" })
+    }
+}
+
+export const removeFromCart = async (req, res) => {
+    const userId = req.user.id;
+    const productId = req.params.productId;
+    try {
+        const cart = await productService.removeFromCart(userId, productId);
+        res.json(cart);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Create cart error" })
+    }
+}
