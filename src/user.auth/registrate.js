@@ -17,9 +17,10 @@ function addNewAccount(event) {
         return;
     }
 
-    fetch('http://localhost:3000/api/auth/registrate', {
+    fetch('https://premortuary-garnett-nonevolving.ngrok-free.dev/api/auth/registrate', {
         method: 'POST',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json"
         },
         body: JSON.stringify(productData)

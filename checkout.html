@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Mykyta Myrakhovskiy">
+        <title>Замовлення</title>
+        <link rel="stylesheet" href="src/styles.css">
+        <script src="https://kit.fontawesome.com/842793bbb5.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <header class="header flex-center">
+        <div class="top-row flex-center">
+            <div id="textlogo-mobile"class="nav-item">
+                <h4>OnlyFresh</h4>
+            </div>
+        </div>
+
+        <div class="under-row flex-center">
+            <div class="logo-container flex-center">
+                <img src="/images/logo.png" alt="Лого.png" class="logo"/>
+            </div>
+
+            <a href="catalog.html" class="a-reset go-back-arrow">
+                <span><i class="fa-solid fa-arrow-left-long"></i></span>
+                До кошику
+            </a>
+
+            <div class="phone-container">
+                    <span class="flex-center">
+                        <img src="https://i.ibb.co/WvWLg2ZH/image-88.png" alt="">
+                        <p>+380XXXXXXXXX</p>
+                    </span>
+            </div>
+        </div>
+    </header>
+    <main class="checkout-main">
+        <div class="order">
+            <h1>Оформлення замовлення</h1>
+            <h2>Ваші товари</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Ваші товари:</td>
+                        <td></td>
+                        <td>Кількість:</td>
+                        <td>Вартість:</td>
+                    </tr>
+                </thead>
+                    
+                <tbody id="cart-table-body">
+                <!-- cart products -->
+                </tbody>
+            </table>
+
+            <h2>Доставка</h2>
+            <ul class="delivery-ul">
+                <li>Самовивіз з складу</li>
+                <li id="nova-post">
+                    Самовивіз з нової пошти
+                    <div class="address">
+                        <button class="btn open-delivery-address">
+                            виберіть відповідне відділення
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                            <ul class="branches-ul">
+                            </ul>
+                        </div>
+                    </div> 
+                </li>
+            </ul>
+
+            <h2>Спосіб оплати</h2>
+            <ul class="payment-ul">
+                <li>Оплатити карткою зараз</li>
+                <li>Оплатити готівкою при отриманні</li>
+            </ul>
+
+            <h2>Отримувач</h2>
+            <span class="user">
+                <i class="fa fa-user"></i>
+                <div>
+                    <h3>Мураховський Микита</h3>
+                    <p>+380978061161</p>
+                </div>
+            </span>
+        </div>
+
+        <div class="order-confirm">
+            <h2>Разом</h2>
+
+            <span>
+                <p>Товарів:</p>
+                <p id="amount-display-text"></p>
+            </span>
+
+            <span>
+                <p>Місце доставки:&nbsp</p>
+                <p id="final-delivery"></p>
+            </span>
+
+            <hr>
+
+            <span>
+                <p>До сплати:</p>
+                <p id="sum-price"></p>
+            </span>
+
+            <hr>
+
+            <button class="btn make-order">
+                <span id="make-order">Підтвердити замовлення</span>
+            </button>
+            
+            <p> Підтверджуючи замовлення, я приймаю умови:
+                <ul>
+                    <li>положення про обробку і захист персональних даних</li>
+                    <li>угоди користувача</li>
+                </ul>
+            </p>
+        </div>
+    </main> 
+    </body>
+    <script src="src/pages/cart.js"></script>
+    <script src="src/pages/checkout.js"></script>
+</html>
+
+    

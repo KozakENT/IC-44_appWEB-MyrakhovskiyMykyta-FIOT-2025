@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     showAmountInCart()
+
+    if (document.getElementById('cart-table-body')) {
+        showCart();
+        finalPrice();
+    }
+
     // Відкриття/закриття кошику
     document.addEventListener('click', (e) => {
         const button = e.target.closest('#open-cart-button');
@@ -54,14 +60,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     });
+
+    document.addEventListener('click', (e) => {
+        const button = e.target.closest('#make-order');
+        if (button) {
+            location.href = 'checkout.html'
+        }
+    })
 })
 
 function createCart(productId) {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3000/api/products/cart/${productId}`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart/${productId}`, {
         method: 'POST',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Authorization": `Bearer ${token}`
         }
     })
@@ -81,9 +95,10 @@ function createCart(productId) {
 function removeFromCart(productId) {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3000/api/products/cart/${productId}`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart/${productId}`, {
         method: 'DELETE',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Authorization": `Bearer ${token}`
         }
     })
@@ -103,9 +118,10 @@ function removeFromCart(productId) {
 function showCart() {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3000/api/products/cart`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart`, {
         method: 'GET',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Authorization": `Bearer ${token}`
         }
     })
@@ -122,7 +138,11 @@ function showCart() {
         }
 
         for (const [productId, quantity] of entries) {
-            const product = await fetch(`http://localhost:3000/api/products/${productId}`)
+            const product = await fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/${productId}`, {
+                headers: {
+                    "ngrok-skip-browser-warning": "true"
+                }
+            })
             .then(res => res.json());
 
             let newPrice = product.ProductCost;
@@ -157,16 +177,18 @@ function showCart() {
 function showAmountInCart() {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3000/api/products/cart`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart`, {
         method: 'GET',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Authorization": `Bearer ${token}`
         }
     })
     .then(res => res.json())
     .then(async (data) => { 
-        const entries = Object.entries(data);
         const span = document.getElementById('amount-display-text');
+        if (!span) return;
+        const entries = Object.entries(data);
 
         if (entries.length != 0) {
             const totalCount = Object.values(data).reduce((sum, qty) => sum + Number(qty), 0);
@@ -179,9 +201,10 @@ function showAmountInCart() {
 function finalPrice() {
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3000/api/products/cart`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart`, {
         method: 'GET',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Authorization": `Bearer ${token}`
         }
     })
@@ -191,7 +214,11 @@ function finalPrice() {
         let total = 0;
 
         for (const [productId, quantity] of entries) {
-            const product = await fetch(`http://localhost:3000/api/products/${productId}`)
+            const product = await fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/${productId}`, {
+                headers: {
+                    "ngrok-skip-browser-warning": "true"
+                }
+            })
             .then(res => res.json());
 
             let newPrice = product.ProductCost; 

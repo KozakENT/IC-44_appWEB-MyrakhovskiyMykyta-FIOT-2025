@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { getAllProducts, createProduct, getProductById, updateProduct, deleteProduct, sortProducts, buttonBuyClick, sortByWord, sortByPriceSlider,
-    addToCart, getCart, removeFromCart
+    addToCart, getCart, removeFromCart, saveDeliveryPlace, savePaymentType, checkoutSuccess, checkoutCallback
  } from './product.controller.js';
 import { authMiddleware } from '../auth/auth.middleware.js';
+import { getLiqpayForm } from '../liqpay/connect.js'
 
 const router = Router();
 
@@ -13,6 +14,11 @@ router.post('/buy/:id', buttonBuyClick);
 router.post('/cart/:productId', authMiddleware, addToCart);
 router.get('/cart', authMiddleware, getCart);
 router.delete('/cart/:productId', authMiddleware, removeFromCart);
+router.post('/checkout/delivery', authMiddleware, saveDeliveryPlace);
+router.post('/checkout/payment', authMiddleware, savePaymentType);
+router.post('/checkout/liqpay', authMiddleware, getLiqpayForm);
+router.get('/checkout/success', checkoutSuccess);
+router.post('/checkout/callback', checkoutCallback);
 
 // загальні — в кінці
 router.get('/', getAllProducts);

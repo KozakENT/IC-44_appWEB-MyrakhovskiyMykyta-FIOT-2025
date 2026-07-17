@@ -69,9 +69,10 @@ function createProduct(event) {
         photo: photo
     };
 
-    fetch('http://localhost:3000/api/products', {
+    fetch('https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products', {
         method: 'POST',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json"
         },
         body: JSON.stringify(productData)
@@ -93,9 +94,10 @@ function deleteProduct(event) {
 
     const id = parseInt(document.getElementById('ProductId').value, 10);
 
-    fetch(`http://localhost:3000/api/products/${id}`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/${id}`, {
         method: 'DELETE',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json"
         }
     })
@@ -121,9 +123,10 @@ function updateProduct(event) {
         return;
     }
 
-    fetch(`http://localhost:3000/api/products/${id}`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/${id}`, {
         method: 'PUT',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ field, value })

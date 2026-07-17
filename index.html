@@ -22,12 +22,12 @@
         <div class="top-row flex-center">
             <nav class="nav">
             <ul>
-                <li class="nav-item"><a href="catalog.html">Каталог</a></li>
-                <li class="nav-item"><a href="#delivery">Умови доставки</a></li>
-                <li class="nav-item"><a href="#about-us">Про нас</a></li>
+                <li class="nav-item tr-color"><a href="catalog.html">Умови повернення</a></li>
+                <li class="nav-item tr-color"><a href="#delivery">Доставка і оплата</a></li>
+                <li class="nav-item tr-color"><a href="#about-us">Про нас</a></li>
             </ul>
             <div class="nav-item">
-                <a href="registrate.html" class="user-container icon-size flex-center a-reset">
+                <a href="" class="user-container icon-size flex-center a-reset">
                     <p>Особистий кабінет <i class="fa fa-user"></i></p>
                 </a>
             </div>
@@ -35,17 +35,8 @@
         </div>
 
         <div class="under-row flex-center">
-            <div class="logo-container flex-center">
+            <div class="logo-container">
                 <img src="/images/logo.png" alt="Лого.png" class="logo"/>
-            </div>
-
-            <div class="search-li">
-                <form class="search" method="get">
-                    <input type="text" id="search" name="search" placeholder="Я шукаю...">
-                        <button class="btn btn--search" type="submit" onclick="doSearch(event)">
-                            <i class="fa fa-search"></i>
-                        </button>
-                </form>
             </div>
 
             <div class="phone-container">
@@ -56,12 +47,13 @@
             </div>
 
             <div class="icons-container">
-                    <div class="icons-wrapper flex-center">
+                    <div class="icons-wrapper tr-color flex-center" id="open-cart-button">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p id="cart-text">Мій кошик</p>
+                        <span class="amount-display" id="amount-display-text">1</span>
                     </div>
                     
-                    <div class="icons-wrapper icon-size burger-visible flex-center">
+                    <div class="icons-wrapper tr-color icon-size burger-visible flex-center">
                         <div class="burger-menu">
                         <i class="fa fa-bars"></i>
                     </div>
@@ -70,74 +62,112 @@
         </div>
     </header>
 
-    <main>
-        <section class="main-page">
-            <div class="block-img-cover bg-cover">
-                <h1 class="block-img-cover_title">Свіжа риба з доставкою по всій Україні!</h1>
-                <button class="btn btn--img-cover">Перейти до каталогу..</button>
-            </div>
-            <h2 id="catalog-selection" >Найпопулярніші категорії</h2>
-            <br>
-            <div class="products-table">
-                <div class="product">
-                    <img class="poster" src="/images/product-taran-chishena.jpg" alt="taran-chishena.png">
-                    <h3>Тарань чищена</h3>
-                    <p>Солена, сушена; 650,00грн/кг</p>
-                </div>
+    <div id="loginForm" class="pop-up-overlay" >
+        <div class="login-wrap flex-column">
+            <h2>Вітаю!</h2>
+            <form class="flex-column">
+                <input id="username" type="text" placeholder="Username" />
+                <input id="password" type="password" placeholder="Password" />
+                <button type="button" onclick="loginUser(event)">Увійти</button>
+            </form>
+            <p id="error"></p>
+        </div>
+    </div>
 
-                <div class="product">
-                    <img class="poster" src="/images/product-forel-raidujna.jpg" alt="forel-raidujna.png">
-                    <h3>Форель райдужна</h3>
-                    <p>Потрана; 395,00грн/кг</p>
-                </div>
-
-                <div class="product">
-                    <img class="poster" src="/images/product-losos-file.jpg" alt="losos-file.png">
-                    <h3>Лосось філе</h3>
-                    <p>755,00грн/кг</p>
-                </div>
-
-                <div class="product">
-                    <img class="poster" src="/images/product-losos-shmatochkami.jpg" alt="losos-shmatochkami.png">
-                    <h3>Лосось шматочками</h3>
-                    <p>Слабосолений; 793,00грн/кг</p>
-                </div>
-            </div>
-            <div class="products-table">
-                <div class="product">
-                    <img class="poster" src="/images/product-nagetsi.jpg" alt="nagetsi.png">
-                    <h3>Нагетси</h3>
-                    <p> (цільне Філе); упак 3кг: 663,00грн<br>упак 1кг: 221,00грн</p>
-                </div>
-                <div class="product">
-                    <img class="poster" src="/images/product-kachina-nijka.jpg" alt="kachina-nijka.png">
-                    <h3>Качина ніжка</h3>
-                    <p>(в упак 2шт); 315,00грн/кг</p>
-                </div>
-                <div class="product">
-                    <img class="poster" src="/images/product-file-kachine.jpg" alt="product-file-kachine.png">
-                    <h3>Філе качине</h3>
-                    <p>(в упак 2шт);  468,00грн/кг</p>
-                </div>
-                <div class="product">
-                    <img class="poster" src="/images/product-ikra-foreli.jpg" alt="ikra-foreli.png">
-                    <h3>Ікра форелі</h3>
-                    <p>0,250г: 950,00грн<br>0,400г: 1520,00грн</p>
-                </div>
-            </div>
-        </section>
+    <main class="main-page">
+        <div class="block-img-cover bg-cover flex-row">
+            <i class="fa-solid fa-circle-chevron-left"></i>
+            <i class="fa-solid fa-circle-chevron-right"></i>
+        </div>
+        <div class="catalog-link flex-center">
+            <a class="a-reset flex-row" href="catalog.html">
+                <i class="fa-solid fa-border-all"></i>
+                <h2>Каталог</h2>
+            </a>
+        </div>
     </main>
+    <section>
+        <h3 class="ml-90">Хіти продажу!</h3>
+        <div class="products-grid topsale" id="products-table">
+                    <!-- Таблиця -->
+        </div>
+        <h3 class="ml-90">Актуальні знижки!</h3>
+        <div class="products-grid discount" id="products-table">
+                    <!-- Таблиця -->
+        </div>
+    </section>
+    <section class="pop-up-overlay cart flex-center">
+                <div class="pop-up">
+                    <span id="close-cart"><i class="fa-solid fa-xmark"></i></span>
+
+                    <h3>Кошик</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Ваші товари:</td>
+                                <td></td>
+                                <td>Кількість:</td>
+                                <td>Вартість:</td>
+                            </tr>
+                        </thead>
+                    
+                        <tbody id="cart-table-body">
+                        <!-- cart products -->
+                        </tbody>
+                    </table>
+
+                    <div class="cart-summary flex-center">
+                        <h2>Загальна ціна:</h2>
+                        <span id="sum-price"></span>
+                    </div>
+
+                    <div class="cart-buttons flex-center">
+                        <button class="go-back-arrow">
+                            <span><i class="fa-solid fa-arrow-left-long"></i></span>
+                            <span id="go-back">До інших позицій</span>
+                        </button>
+                        <button class="btn make-order">
+                            <span id="make-order">Зробити замовлення</span>
+                        </button>
+                    </div>
+            
+                    <h2>Рекомендуємо спробувати також:</h2>
+                    <div>
+                    <!-- Товари -->    
+                    </div>
+                </div>
+            </section>
         
     <footer class="footer flex-center">
-        <div class="quality-guarantee">
-            <h4>Інформація</h4>
-            <a>Про нас</a>
+        <div class="logo-container flex-column">
+            <img src="/images/logo.png" alt="Лого.png" class="logo"/>
+            <p>&copy; 2020-2026</p>
         </div>
-        <div class="contacts ml-30">
-            <h4>Служба підтримки &copy; OnlyFresh</h4>
-            <a>Контакти</a>
+        <div class="clients-info flex-column">
+            <h3>Клієнтам:</h3>
+            <a class="a-reset" href="">Про нас</a>
+            <a class="a-reset" href="">Доставка і оплата</a>
+            <a class="a-reset" href="">Умови повернення</a>
+            <a class="a-reset" href="">Особистий кабінет</a>
+        </div>
+        <div class="shop flex-column">
+            <h3>Магазин:</h3>
+            <div class="flex-row">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <h4 class="address">вулиця Адама Міцкевича, 2 Коломия, Івано-Франківська область, 78200</h4>
+            </div>
+        </div>
+        <div class="media">
+            <h3>Наші соцмережі:</h3>
+            <div class="social-media flex-row">
+                <a href="https://www.instagram.com/"><img class="img-mini" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt=""></a>
+                <a href=""><img class="img-mini" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Viber_logo_2018_%28without_text%29.svg/250px-Viber_logo_2018_%28without_text%29.svg.png" alt=""></a>
+            </div>
         </div>
     </footer>
+
     <script type="module" src="src/pages/main.js"></script>
+    <script src="src/pages/cart.js"></script>
 </body>
 </html>

@@ -27,12 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const maxvalue = document.querySelector('.max-range').value;
         sortByPriceSlider(minvalue, maxvalue);
     });
+    
 });
 
 function readProduct() {
-    fetch('http://localhost:3000/api/products', {
+    fetch('https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products', {
         method: 'GET',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json"
         }
     })
@@ -150,9 +152,10 @@ function displayCategory(products) {
 }
 
 function getSorted(sortType) {
-    fetch(`http://localhost:3000/api/products/sort/${sortType}`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/sort/${sortType}`, {
         method: 'GET',
         headers: {
+            "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json"
         }
     })
@@ -168,9 +171,10 @@ function getSorted(sortType) {
 }
 
 function searchBy(inputContent) {
-    fetch(`http://localhost:3000/api/products/search/${encodeURIComponent(inputContent)}`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/search/${encodeURIComponent(inputContent)}`, {
         method: 'GET',
     headers: {
+            "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json"
         }
     })
@@ -186,9 +190,10 @@ function searchBy(inputContent) {
 }
 
 function sortByPriceSlider(minvalue, maxvalue) {
-    fetch(`http://localhost:3000/api/products/price/${minvalue}-${maxvalue}`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/price/${minvalue}-${maxvalue}`, {
         method: 'GET',
     headers: {
+            "ngrok-skip-browser-warning": "true",
             "Content-Type": "application/json"
         }
     })
@@ -204,8 +209,11 @@ function sortByPriceSlider(minvalue, maxvalue) {
 }
 
 function buttonBuyClick(productId) {
-    fetch(`http://localhost:3000/api/products/buy/${productId}`, {
+    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/buy/${productId}`, {
         method: 'POST',
+        headers: {
+            "ngrok-skip-browser-warning": "true"
+        }
     })
     .then(res => res.json())
     .then(productId => {

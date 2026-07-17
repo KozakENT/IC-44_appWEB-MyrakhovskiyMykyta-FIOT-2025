@@ -192,4 +192,103 @@ export class ProductService {
         return result;
     }
 
+    async saveDelivery(userId, deliveryPlace) {
+        const result = await client.hSet(`user:${userId}`, {deliveryPlace})
+        await client.expire(`user:${userId}`, 86400)
+
+        return result;
+    }
+
+    async saveTypeOfPayment(userId, TypeOfPayment) {
+        const result = await client.hSet(`user:${userId}`, {TypeOfPayment})
+        await client.expire(`user:${userId}`, 86400)
+
+        return result;
+    }
+
+    async calculateTotal(userId) {
+        const cart = await this.getCart(userId); // { productId: quantity }
+        const entries = Object.entries(cart);
+        let total = 0;
+
+        for (const [productId, quantity] of entries) {
+            const product = await this.getProductById(productId); // уже есть у тебя
+            let price = product.ProductCost;
+            if (product.ProductDiscountPercent != null) {
+                price = Math.round(product.ProductCost * (1 - product.ProductDiscountPercent / 100));
+            }
+            total += price * Number(quantity);
+        }
+
+        return total;
+    }
+
+    /* 
+    Внутри checkoutRequest в сервисе уже сам достанешь из Redis доставку/оплату/корзину и сделаешь INSERT. 
+
+    Сначала INSERT в cRequest — передаёшь userId, RequestStatus, RequestDate, RequestDeliveryPlace, RequestTypeOfPayment, 
+    RequestFinalCost. Берёшь userId из order_id (ты же туда писал order_${userId}_${Date.now()}), доставку и оплату — 
+    из Redis через hGetAll.
+
+    Потом INSERT в cRequestRow — тянешь корзину из Redis через getCart(userId), проходишь по каждому товару циклом, 
+    для каждого делаешь отдельный INSERT с RequestId (который получил после первого INSERT), ProductId, RequestQuantity, 
+    RequestRowCost.
+
+    Очистить Redis — корзину, доставку, оплату
+    Вернуть LiqPay 200 OK — иначе он будет повторно слать колбэк
+    */
+    async checkoutRequest(userId, amount) {
+        const userDraft = await client.hGetAll(`user:${userId}`);
+        const delivery = userDraft.deliveryPlace;
+        const payment = userDraft.TypeOfPayment;
+
+        const finalCost = await this.calculateTotal(userId);
+
+        const cart = await this.getCart(userId);
+        const entries = Object.entries(cart)
+
+        const pool = await poolPromise;
+        try {
+            const result = await pool.request()
+            .input ('userId', sql.Int, userId)
+            .input ('reqStatus', sql.NVarChar(255), "new")
+            .input ('reqDate', sql.DateTime, new Date())
+            .input ('reqDelivery', sql.NVarChar(255), delivery)
+            .input ('reqPayment', sql.NVarChar(255), payment)
+            .input ('reqFinalCost', sql.Decimal(10,2), finalCost)
+            .query (`INSERT INTO cRequest 
+                (UserId, RequestStatus, RequestDate, RequestDeliveryPlace, RequestTypeOfPayment, RequestFinalCost) 
+                VALUES (@userId, @reqStatus, @reqDate, @reqDelivery, @reqPayment, @reqFinalCost);
+                SELECT SCOPE_IDENTITY() AS RequestId`)
+            
+            const requestId = result.recordset[0].RequestId;
+
+            for (const [productId, quantity] of entries) {
+                const id = Number(productId);
+                const qty = Number(quantity);
+
+                const product = await this.getProductById(id);
+                let price = product.ProductCost;
+                if (product.ProductDiscountPercent != null) {
+                    price = Math.round(product.ProductCost * (1 - product.ProductDiscountPercent / 100));
+                };
+                const rowCost = price * qty;
+
+                await pool.request()
+                .input ('reqId', sql.Int, requestId)
+                .input ('productId', sql.Int, id)
+                .input ('reqQnt', sql.Int, qty)
+                .input ('reqRowCost', sql.Decimal(10,2), rowCost)
+                .query (`INSERT INTO cRequestRow 
+                    (RequestId, RequestQuantity, RequestRowCost, ProductId) 
+                    VALUES (@reqId, @reqQnt, @reqRowCost, @productId)`)
+            };
+
+            return { message: 'Request Row inserted!' };
+        }
+        catch (err) {
+            console.error('Error inserting request: ', err);
+        }
+    }
 }
+

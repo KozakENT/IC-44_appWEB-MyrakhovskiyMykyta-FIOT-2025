@@ -16,3 +16,16 @@ if (payload.role !== "User") {
     window.location.href = "/login.html";
 }
 */
+
+// Відкриття/закриття кошику
+document.addEventListener('click', (e) => {
+    const button = e.target.closest('.user-container');
+    const form = document.querySelector('.login-wrap')
+    const form2 = document.getElementById('loginForm')
+
+    if (button) {
+        e.preventDefault();
+        form2.style.display = 'flex';
+        form.style.display = 'flex';
+    }
+});

@@ -5,9 +5,12 @@ async function loginUser(event) {
     const password = document.getElementById("password").value;
 
     try {
-        const res = await fetch("http://localhost:3000/api/auth/login", {
+        const res = await fetch("https://premortuary-garnett-nonevolving.ngrok-free.dev/api/auth/login", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "ngrok-skip-browser-warning": "true",
+                "Content-Type": "application/json"
+             },
             body: JSON.stringify({ username, password })
         });
 
@@ -22,8 +25,9 @@ async function loginUser(event) {
         localStorage.setItem("token", data.token);
 
         // робимо другий запит на /auth/me
-        const meRes = await fetch("http://localhost:3000/api/auth/me", {
+        const meRes = await fetch("https://premortuary-garnett-nonevolving.ngrok-free.dev/api/auth/me", {
             headers: {
+                "ngrok-skip-browser-warning": "true",
                 "Authorization": `Bearer ${data.token}`
             }
         });

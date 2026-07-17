@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+    <link rel="stylesheet" href="src/styles.css">
+     <script src="https://kit.fontawesome.com/842793bbb5.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Mykyta Myrakhovskiy">
-    <title>OnlyFresh | Мій профіль</title>
+    <title>Особистий кабінет</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="src/styles.css">
-    <script src="src/pages/main.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="OnlyFresh" />
+    <link rel="manifest" href="/images/site.webmanifest" /> 
 </head>
 <body class="bg-cover">
     <header class="header flex-center">
         <div class="top-row flex-center">
             <nav class="nav">
+            <div id="textlogo-mobile"class="nav-item">
+                <h4>OnlyFresh</h4>
+            </div>
             <ul>
                 <li class="nav-item"><a href="catalog.html">Каталог</a></li>
                 <li class="nav-item"><a href="#delivery">Умови доставки</a></li>
@@ -33,15 +42,6 @@
                 <img src="/images/logo.png" alt="Лого.png" class="logo"/>
             </div>
 
-            <div class="search-li">
-                <form class="search" method="get">
-                    <input type="text" id="search" name="search" placeholder="Я шукаю...">
-                        <button class="btn btn--search" type="submit" onclick="doSearch(event)">
-                            <i class="fa fa-search"></i>
-                        </button>
-                </form>
-            </div>
-
             <div class="phone-container">
                     <span class="flex-center">
                         <img src="https://i.ibb.co/WvWLg2ZH/image-88.png" alt="">
@@ -50,9 +50,10 @@
             </div>
 
             <div class="icons-container">
-                    <div class="icons-wrapper flex-center">
-                        <img src="https://i.ibb.co/G412WkFT/cart.png" alt="">
-                        <p>Мій кошик</p>
+                    <div class="icons-wrapper flex-center" id="open-cart-button">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p id="cart-text">Мій кошик</p>
+                        <span class="amount-display" id="amount-display-text">1</span>
                     </div>
                     
                     <div class="icons-wrapper icon-size burger-visible flex-center">
@@ -104,6 +105,49 @@
             </div>
         </div>
         </section>
+        <section class="pop-up-overlay cart flex-center">
+            <div class="pop-up">
+                <span id="close-cart"><i class="fa-solid fa-xmark"></i></span>
+
+                <h3>Кошик</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Ваші товари:</td>
+                            <td></td>
+                            <td>Кількість:</td>
+                            <td>Вартість:</td>
+                        </tr>
+                     </thead>
+                    
+                    <tbody id="cart-table-body">
+                    <!-- cart products -->
+                    </tbody>
+                </table>
+
+                <div class="cart-summary flex-center">
+                    <h2>Загальна ціна:</h2>
+                    <span id="sum-price"></span>
+                </div>
+
+                <div class="cart-buttons flex-center">
+                    <button class="go-back-arrow">
+                        <span><i class="fa-solid fa-arrow-left-long"></i></span>
+                        <span id="go-back">До інших позицій</span>
+                    </button>
+                    <button class="btn make-order">
+                        <span id="make-order">Зробити замовлення</span>
+                    </button>
+                </div>
+            
+                <h2>Рекомендуємо спробувати також:</h2>
+                <div>
+                <!-- Товари -->    
+                </div>
+            </div>
+        </section>
     </main>
 </body>
+<script src="src/pages/cart.js"></script>
 </html>

@@ -1,4 +1,6 @@
 import { ProductService } from './product.service.js';
+import { client } from '../../redis/connect.js';
+import crypto from 'crypto';
 
 const productService = new ProductService();
 
@@ -153,5 +155,66 @@ export const removeFromCart = async (req, res) => {
     catch (err) {
         console.error(err);
         res.status(500).json({ message: "Create cart error" })
+    }
+}
+
+export const saveDeliveryPlace = async (req, res) => {
+    const userId = req.user.id;
+    const deliveryPlace = req.body.deliveryPlace;
+    try {
+        const delivery = await productService.saveDelivery(userId, deliveryPlace);
+        res.json(delivery);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Delivery save error" })
+    }
+}
+
+export const savePaymentType = async (req, res) => {
+    const userId = req.user.id;
+    const TypeOfPayment = req.body.TypeOfPayment;
+    try {
+        const payment = await productService.saveTypeOfPayment(userId, TypeOfPayment);
+        res.json(payment);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Payment save error" })
+    }
+}
+
+export const checkoutSuccess = async (req, res) => { 
+
+}
+
+export const checkoutCallback = async (req, res) => {
+    const data = req.body.data;
+    const signature = req.body.signature;
+
+    try {
+        const sign = crypto
+            .createHash('sha1')
+            .update(process.env.LIQPAY_PRIVATE_KEY + data + process.env.LIQPAY_PRIVATE_KEY)
+            .digest('base64');
+        if (sign !== signature) return res.status(400).json({ message: 'Invalid signature' });
+
+        const decoded = Buffer.from(data, 'base64').toString('utf-8');
+        const parsedData = JSON.parse(decoded);
+
+        const orderId = parsedData.order_id;
+        const userId = orderId.split('_')[1];
+
+        if (parsedData.status !== 'success') return res.status(200).send('ok');
+        else {
+            await productService.checkoutRequest(userId, parsedData.amount);
+            await client.del(`cart:${userId}`);
+            await client.del(`user:${userId}`)
+            res.status(200).send('ok');
+        } 
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Checkout success error" })
     }
 }
