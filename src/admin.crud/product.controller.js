@@ -185,7 +185,7 @@ export const savePaymentType = async (req, res) => {
 }
 
 export const checkoutSuccess = async (req, res) => { 
-
+    window.location.href("")
 }
 
 export const checkoutCallback = async (req, res) => {
@@ -216,5 +216,16 @@ export const checkoutCallback = async (req, res) => {
     catch (err) {
         console.error(err);
         res.status(500).json({ message: "Checkout success error" })
+    }
+}
+
+export const discountOnlyProducts = async (req, res) => {
+    try {
+        const products = await productService.discountOnly();
+        res.json(products);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Discount error" })
     }
 }

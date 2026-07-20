@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getAllProducts, createProduct, getProductById, updateProduct, deleteProduct, sortProducts, buttonBuyClick, sortByWord, sortByPriceSlider,
-    addToCart, getCart, removeFromCart, saveDeliveryPlace, savePaymentType, checkoutSuccess, checkoutCallback
+    addToCart, getCart, removeFromCart, saveDeliveryPlace, savePaymentType, checkoutSuccess, checkoutCallback, discountOnlyProducts
  } from './product.controller.js';
 import { authMiddleware } from '../auth/auth.middleware.js';
 import { getLiqpayForm } from '../liqpay/connect.js'
@@ -12,6 +12,7 @@ router.get('/search/:inputContent', sortByWord);
 router.get('/price/:minvalue-:maxvalue', sortByPriceSlider);
 router.post('/buy/:id', buttonBuyClick);
 router.post('/cart/:productId', authMiddleware, addToCart);
+router.get('/discount', discountOnlyProducts);
 router.get('/cart', authMiddleware, getCart);
 router.delete('/cart/:productId', authMiddleware, removeFromCart);
 router.post('/checkout/delivery', authMiddleware, saveDeliveryPlace);

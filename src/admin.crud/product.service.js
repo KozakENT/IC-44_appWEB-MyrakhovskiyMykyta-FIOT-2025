@@ -52,7 +52,7 @@ export class ProductService {
     }
 
     async createProduct(body) {
-        const { name, price, description, category, photo } = body;
+        const { name, price, description, category, discount, photo } = body;
         const pool = await poolPromise;
 
         try {
@@ -61,10 +61,11 @@ export class ProductService {
             .input ('price', sql.Decimal(10,2), price)
             .input ('description', sql.NVarChar(255), description)
             .input ('category', sql.NVarChar(50), category)
+            .input ('discount', sql.Decimal(10,2), discount)
             .input ('photo', sql.VarChar(255), photo)
             .query (`INSERT INTO cProduct 
-                (ProductName, ProductCost, ProductDescription, ProductCategory, ProductPhoto) 
-                VALUES (@name, @price, @description, @category, @photo)`)
+                (ProductName, ProductCost, ProductDescription, ProductCategory, ProductDiscountPercent, ProductPhoto) 
+                VALUES (@name, @price, @description, @category, @discount, @photo)`)
             
             return { message: 'Product inserted!' };
         }
@@ -160,6 +161,19 @@ export class ProductService {
         }
         catch (err) {
             console.error('Error confirming price-sort', err);
+            throw err;
+        }
+    }
+
+    async discountOnly() {
+        const pool = await poolPromise;
+        try {
+            const result = await pool.request().query(`SELECT * FROM cProduct WHERE ProductDiscountPercent IS NOT NULL AND ProductDiscountPercent > 0`)
+
+            return result.recordset.slice(0, 4);
+        }
+        catch (err) {
+            console.error("Error finding discount products", err);
             throw err;
         }
     }

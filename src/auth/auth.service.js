@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { sql, poolPromise } from '../../config/db.js';
+import { client } from '../../redis/connect.js';
 
 export class AuthService {
 
@@ -70,6 +71,25 @@ export class UserService {
         } catch (err) {
             console.error('Error creating account:', err);
             return { message: 'Account creation failed!' };
+        }
+    }
+
+    async getUserInfo (userId) {
+        const pool = await poolPromise;
+
+        try {
+            const result = await pool.request()
+            .input('userId', sql.Int, userId)
+            .query(`
+                SELECT Username, PhoneNumber FROM cUser
+                WHERE UserId = @userId
+                `)
+            
+            return result.recordset[0];
+        }
+        catch (err) {
+            console.error('Error merging id', err);
+            throw err;
         }
     }
 }

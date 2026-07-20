@@ -35,10 +35,6 @@ export const login = async (req, res) => {
     }
 };
 
-export const me = async (req, res) => {
-    res.json(req.user);
-};
-
 export const addNewAccount = async (req, res) => {
     try {
         const result = await userService.addNewAccount(req.body);
@@ -48,3 +44,15 @@ export const addNewAccount = async (req, res) => {
         res.status(500).json({ message: "Insert error" });
     }
 }
+
+export const userInfo = async (req, res) => {
+    const userId = req.user.id;
+    try {
+        const user = await userService.getUserInfo(userId);
+        res.json(user);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "User found error" })
+    }
+};

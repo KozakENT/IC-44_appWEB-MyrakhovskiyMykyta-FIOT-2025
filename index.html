@@ -50,7 +50,7 @@
                     <div class="icons-wrapper tr-color flex-center" id="open-cart-button">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p id="cart-text">Мій кошик</p>
-                        <span class="amount-display" id="amount-display-text">1</span>
+                        <span class="amount-display flex-center" id="amount-display-text">1</span>
                     </div>
                     
                     <div class="icons-wrapper tr-color icon-size burger-visible flex-center">
@@ -74,6 +74,22 @@
         </div>
     </div>
 
+    <div id="registrateForm" class="pop-up-overlay" >
+        <div class="registrate-wrap flex-column">
+            <h2>Вітаю! Зареєструйте новий аккаунт або увійдіть якщо вже маєте.</h2>
+            <form class="flex-column">
+                <input id="username" type="text" placeholder="Username" />
+                <input id="phoneNumber" type="text" placeholder="Phone Number" />
+                <input id="email" type="email" placeholder="Email" />
+                <input id="password" type="password" placeholder="Password" />
+                <button type="button" onclick="addNewAccount(event)">Створити</button>    
+            </form>
+            <p id="error"></p>
+            <br>
+            <button class="open-login" type="button">Я вже зареєстрований</button>
+        </div>
+    </div>
+
     <main class="main-page">
         <div class="block-img-cover bg-cover flex-row">
             <i class="fa-solid fa-circle-chevron-left"></i>
@@ -86,16 +102,18 @@
             </a>
         </div>
     </main>
-    <section>
-        <h3 class="ml-90">Хіти продажу!</h3>
-        <div class="products-grid topsale" id="products-table">
+
+    <section class="flex-column flex-center">
+        <h3>Хіти продажу!</h3>
+        <div class="products-grid topsale" id="topsale-table">
                     <!-- Таблиця -->
         </div>
-        <h3 class="ml-90">Актуальні знижки!</h3>
-        <div class="products-grid discount" id="products-table">
+        <h3>Актуальні знижки!</h3>
+        <div class="products-grid discount" id="discount-table">
                     <!-- Таблиця -->
         </div>
     </section>
+
     <section class="pop-up-overlay cart flex-center">
                 <div class="pop-up">
                     <span id="close-cart"><i class="fa-solid fa-xmark"></i></span>
@@ -137,13 +155,9 @@
                     <!-- Товари -->    
                     </div>
                 </div>
-            </section>
+    </section>
         
     <footer class="footer flex-center">
-        <div class="logo-container flex-column">
-            <img src="/images/logo.png" alt="Лого.png" class="logo"/>
-            <p>&copy; 2020-2026</p>
-        </div>
         <div class="clients-info flex-column">
             <h3>Клієнтам:</h3>
             <a class="a-reset" href="">Про нас</a>
@@ -169,5 +183,7 @@
 
     <script type="module" src="src/pages/main.js"></script>
     <script src="src/pages/cart.js"></script>
+    <script src="src/auth/login.js" defer></script>
+    <script src="src/user.auth/registrate.js" defer></script>
 </body>
 </html>

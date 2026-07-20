@@ -1,13 +1,12 @@
 import { Router } from 'express';
-import { login, me, addNewAccount } from './auth.controller.js';
+import { login, userInfo, addNewAccount } from './auth.controller.js';
 import { authMiddleware, roleMiddleware } from './auth.middleware.js';
-
 
 const router = Router();
 
 router.post('/login', login);
 
-router.get('/me', authMiddleware, me);
+router.get('/me', authMiddleware, userInfo);
 
 router.get('/admin/panel',
     authMiddleware,
