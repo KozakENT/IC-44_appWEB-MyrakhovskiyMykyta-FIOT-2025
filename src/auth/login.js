@@ -1,3 +1,5 @@
+var BASE_URL = 'https://premortuary-garnett-nonevolving.ngrok-free.dev';
+
 async function loginUser(event) {
     event.preventDefault();
 
@@ -5,7 +7,7 @@ async function loginUser(event) {
     const password = document.getElementById("password").value;
 
     try {
-        const res = await fetch("https://premortuary-garnett-nonevolving.ngrok-free.dev/api/auth/login", {
+        const res = await fetch(`${BASE_URL}/api/auth/login`, {
             method: "POST",
             headers: { 
                 "ngrok-skip-browser-warning": "true",
@@ -25,7 +27,7 @@ async function loginUser(event) {
         localStorage.setItem("token", data.token);
 
         // робимо другий запит на /auth/me
-        const meRes = await fetch("https://premortuary-garnett-nonevolving.ngrok-free.dev/api/auth/me", {
+        const meRes = await fetch(`${BASE_URL}/api/auth/me`, {
             headers: {
                 "ngrok-skip-browser-warning": "true",
                 "Authorization": `Bearer ${data.token}`

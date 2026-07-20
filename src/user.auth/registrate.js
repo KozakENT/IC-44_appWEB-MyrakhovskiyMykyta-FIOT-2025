@@ -1,3 +1,5 @@
+var BASE_URL = 'https://premortuary-garnett-nonevolving.ngrok-free.dev';
+
 function addNewAccount(event) {
     event.preventDefault(); 
 
@@ -17,7 +19,7 @@ function addNewAccount(event) {
         return;
     }
 
-    fetch('https://premortuary-garnett-nonevolving.ngrok-free.dev/api/auth/registrate', {
+    fetch(`${BASE_URL}/api/auth/registrate`, {
         method: 'POST',
         headers: {
             "ngrok-skip-browser-warning": "true",
