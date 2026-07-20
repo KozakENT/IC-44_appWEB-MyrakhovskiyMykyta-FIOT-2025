@@ -2,6 +2,7 @@ import { ProductService } from '../admin.crud/product.service.js';
 import crypto from 'crypto';
 
 const productService = new ProductService();
+var BASE_URL = 'https://premortuary-garnett-nonevolving.ngrok-free.dev';
 
 export const getLiqpayForm = async (req, res) => {
     try {
@@ -17,8 +18,8 @@ export const getLiqpayForm = async (req, res) => {
             'description' : 'Оплата товарів інтернет-магазину OnlyFresh',
             'order_id'    : orderId,
             'version'     : '3',
-            'result_url'  : 'https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/checkout/success',
-            'server_url'  : 'https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/checkout/callback'
+            'result_url'  : `${BASE_URL}/api/products/checkout/success`,
+            'server_url'  : `${BASE_URL}/api/products/checkout/callback`
         };
 
         const data = Buffer.from(JSON.stringify(params)).toString('base64');
