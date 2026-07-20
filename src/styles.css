@@ -321,6 +321,11 @@ input {
 .catalog-link a:hover { 
     color: #313436;
 }
+#topsale-table, #discount-table {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    overflow: hidden;
+}
 
 
 /* Profile  */
@@ -384,15 +389,13 @@ input {
     width: fit-content;
     max-width: 700px;
     text-align: center;
-    background: #f9f9f9;
     padding: 20px;
-    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.login-wrap {
+.login-wrap, .registrate-wrap {
     position: fixed;
-    top: 30%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
@@ -401,6 +404,10 @@ input {
     background: white;
     border-radius: 20px;
     z-index: 10000;
+}
+
+.login-wrap > form, .registrate-wrap > form {
+    padding: 1rem;
 }
 
 .registrate-wrap input,
@@ -424,6 +431,8 @@ input {
     background-color: #E0E9F5;
     align-items: flex-start;
     border-top: solid 4px black;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
 }
 .footer a {
     margin: 0.5em 0;
@@ -435,11 +444,6 @@ input {
     margin: 0;
     max-width: 30vh;
     font-weight: 400;
-}
-.footer .logo-container {
-    align-items: center;
-    align-self: center;
-    margin-left: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -515,6 +519,12 @@ input {
     .main-page {
         margin-top: 0;
     }
+    #topsale-table, #discount-table {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
+        overflow: hidden;
+        max-width: 95vw;
+    }   
     .block-img-cover {
         height: 200px;
     }
@@ -522,9 +532,6 @@ input {
         font-size: 1rem;
     }
     
-    .footer .logo-container {
-        display: none;
-    }
     .footer {
         font-size: 0.8rem;
         flex-direction: column;
@@ -1004,8 +1011,42 @@ tbody .counter button {
         font-size: 14px;
     }
 
+    tbody > tr > td:first-child {
+        width: auto!important;
+        padding: 10px 0 10px 10px;
+    }
+    tbody .counter button {
+        padding-inline: 6px;
+    }
+    tbody > tr > td:last-child {
+        padding: 0;
+        padding-left: 0.5rem;
+    }
+    thead > tr > td {
+        font-size: 0.8rem;
+        padding: 0 0.5rem 0 0;
+    }
+    thead > tr > td:first-child {
+        padding-left: 0.5rem;
+    }
+    .empty-td {
+        padding: 0!important;
+    }
+    table,tr, tbody, td p table div, table table{
+        width:100%;
+    }
+    table img {
+        max-width:100%;
+        height:auto;
+    }
+
     .cart .pop-up {
-        width: 87%;
+        width: 90%;
+        padding: 0 0.5rem;
+    }
+    #open-cart-button span {
+        width: 1.4rem;
+        height: 1.3rem;
     }
     .product-card .product-info, .product-price {
         margin-left: 5px;
@@ -1037,7 +1078,7 @@ tbody .counter button {
 
 /* Замовлення Checkout */
 .checkout-main {
-    padding-top: 2rem;
+    padding-top: 150px;
     display: flex;
     justify-content: space-between;
     background-color: #EBF8FF;
