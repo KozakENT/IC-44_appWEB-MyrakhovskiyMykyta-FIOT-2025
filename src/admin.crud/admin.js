@@ -1,3 +1,5 @@
+var BASE_URL = 'https://premortuary-garnett-nonevolving.ngrok-free.dev';
+
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     
@@ -59,6 +61,7 @@ function createProduct(event) {
     const cost = document.getElementById('cost').value;
     const description = document.getElementById('description').value;
     const category = document.getElementById('category').value;
+    const discount = document.getElementById('discount').value;
     const photo = document.getElementById('photo').value;
 
     const productData = {
@@ -66,10 +69,11 @@ function createProduct(event) {
         price: cost,
         description: description,
         category: category,
+        discount: discount,
         photo: photo
     };
 
-    fetch('https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products', {
+    fetch(`${BASE_URL}/api/products`, {
         method: 'POST',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -94,7 +98,7 @@ function deleteProduct(event) {
 
     const id = parseInt(document.getElementById('ProductId').value, 10);
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/${id}`, {
+    fetch(`${BASE_URL}/api/products/${id}`, {
         method: 'DELETE',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -123,7 +127,7 @@ function updateProduct(event) {
         return;
     }
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/${id}`, {
+    fetch(`${BASE_URL}/api/products/${id}`, {
         method: 'PUT',
         headers: {
             "ngrok-skip-browser-warning": "true",
