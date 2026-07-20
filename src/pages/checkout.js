@@ -1,5 +1,8 @@
+var BASE_URL = 'https://premortuary-garnett-nonevolving.ngrok-free.dev';
+
 document.addEventListener('DOMContentLoaded', () => {
-    createDeliveryUl()
+    createDeliveryUl();
+    userInfo();
 
     // Закриття/відкриття дропдауну
     document.addEventListener('click', (e) => {
@@ -99,7 +102,7 @@ function createDeliveryUl() {
 function saveDeliveryPlace(deliveryPlace) {
     const token = localStorage.getItem("token");
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/checkout/delivery`, {
+    fetch(`${BASE_URL}/api/products/checkout/delivery`, {
         method: 'POST',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -121,7 +124,7 @@ function saveDeliveryPlace(deliveryPlace) {
 function savePaymentType(TypeOfPayment) {
     const token = localStorage.getItem("token");
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/checkout/payment`, {
+    fetch(`${BASE_URL}/api/products/checkout/payment`, {
         method: 'POST',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -143,11 +146,10 @@ function savePaymentType(TypeOfPayment) {
 
 // Фронт делает fetch на твой бэкенд (/api/checkout/liqpay)
 async function liqpayRedirect() {
-    console.log('liqpayRedirect called');
     try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/checkout/liqpay`, {
+        const res = await fetch(`${BASE_URL}/api/products/checkout/liqpay`, {
             method: 'POST',
             headers: {
                 "ngrok-skip-browser-warning": "true",
@@ -157,8 +159,6 @@ async function liqpayRedirect() {
         });
 
         const { data, signature } = await res.json();
-        console.log('data:', data);
-        console.log('signature:', signature);
 
         const form = document.createElement('form');
         form.method = "POST";
@@ -188,7 +188,7 @@ async function liqpayRedirect() {
 /* function renderUser() {
     const token = localStorage.getItem("token");
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/user/${id}`, {
+    fetch(`${BASE_URL}/api/user/${id}`, {
         method: 'GET',
         headers: {
             "Authorization": `Bearer ${token}`
@@ -199,3 +199,26 @@ async function liqpayRedirect() {
         
     })
 }   */
+
+function userInfo() {
+    const token = localStorage.getItem("token");
+
+    fetch(`${BASE_URL}/api/auth/me`, {
+        method: 'GET',
+        headers: {
+            "ngrok-skip-browser-warning": "true",
+            "Authorization": `Bearer ${token}`,
+        }
+    })
+    .then(res => res.json())
+    .then(user => {
+        const username = document.querySelector('.user-name');
+        const userphn = document.querySelector('.user-phnnumber');
+        username.textContent = user.Username;
+        userphn.textContent = user.PhoneNumber;
+    })
+    .catch(err => {
+        console.error("Fetch error:", err);
+        alert("Помилка при відображенні юзеру!");
+    })
+}

@@ -15,9 +15,6 @@
     <header class="header flex-center">
         <div class="top-row flex-center">
             <nav class="nav">
-            <div id="textlogo-mobile"class="nav-item">
-                <h4>OnlyFresh</h4>
-            </div>
             <ul>
                 <li class="nav-item"><a href="catalog.html">Каталог</a></li>
                 <li class="nav-item"><a href="#delivery">Умови доставки</a></li>
@@ -56,7 +53,7 @@
                     <div class="icons-wrapper flex-center" id="open-cart-button">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p id="cart-text">Мій кошик</p>
-                        <span class="amount-display" id="amount-display-text">1</span>
+                        <span class="amount-display flex-center" id="amount-display-text">1</span>
                     </div>
                     
                     <div class="icons-wrapper icon-size burger-visible flex-center">
@@ -67,6 +64,35 @@
             </div>
         </div>
     </header>
+
+    <div id="loginForm" class="pop-up-overlay" >
+        <div class="login-wrap flex-column">
+            <h2>Вітаю!</h2>
+            <form class="flex-column">
+                <input id="username" type="text" placeholder="Username" />
+                <input id="password" type="password" placeholder="Password" />
+                <button type="button" onclick="loginUser(event)">Увійти</button>
+            </form>
+            <p id="error"></p>
+        </div>
+    </div>
+
+    <div id="registrateForm" class="pop-up-overlay" >
+        <div class="registrate-wrap flex-column">
+            <h2>Вітаю! Зареєструйте новий аккаунт або увійдіть якщо вже маєте.</h2>
+            <form class="flex-column">
+                <input id="username" type="text" placeholder="Username" />
+                <input id="phoneNumber" type="text" placeholder="Phone Number" />
+                <input id="email" type="email" placeholder="Email" />
+                <input id="password" type="password" placeholder="Password" />
+                <button type="button" onclick="addNewAccount(event)">Створити</button>    
+            </form>
+            <p id="error"></p>
+            <br>
+            <button class="open-login" type="button">Я вже зареєстрований</button>
+        </div>
+    </div>
+
         <main class="catalog">
             <div class="full-filter flex-center">
                     <button class="btn mobile-sort">Фільтр
@@ -167,7 +193,7 @@
                         <thead>
                             <tr>
                                 <td>Ваші товари:</td>
-                                <td></td>
+                                <td class="empty-td"></td>
                                 <td>Кількість:</td>
                                 <td>Вартість:</td>
                             </tr>
@@ -186,7 +212,7 @@
                     <div class="cart-buttons flex-center">
                         <button class="go-back-arrow">
                             <span><i class="fa-solid fa-arrow-left-long"></i></span>
-                            <span id="go-back">До інших позицій</span>
+                            <a class="a-reset" href="catalog.html"><span id="go-back">До інших позицій</span></a>
                         </button>
                         <button class="btn make-order">
                             <span id="make-order">Зробити замовлення</span>
@@ -200,9 +226,33 @@
                 </div>
             </section>
         </main>
+        <footer class="footer flex-center">
+            <div class="clients-info flex-column">
+                <h3>Клієнтам:</h3>
+                <a class="a-reset" href="">Про нас</a>
+                <a class="a-reset" href="">Доставка і оплата</a>
+                <a class="a-reset" href="">Умови повернення</a>
+                <a class="a-reset" href="">Особистий кабінет</a>
+            </div>
+            <div class="shop flex-column">
+                <h3>Магазин:</h3>
+                <div class="flex-row">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <h4 class="address">вулиця Адама Міцкевича, 2 Коломия, Івано-Франківська область, 78200</h4>
+                </div>
+            </div>
+            <div class="media">
+                <h3>Наші соцмережі:</h3>
+                <div class="social-media flex-row">
+                    <a href="https://www.instagram.com/"><img class="img-mini" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt=""></a>
+                    <a href=""><img class="img-mini" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Viber_logo_2018_%28without_text%29.svg/250px-Viber_logo_2018_%28without_text%29.svg.png" alt=""></a>
+                </div>
+            </div>
+        </footer>
         <script src="src/pages/catalog.js"></script>
         <script src="src/pages/cart.js"></script>
-        <script src="src/pages/main.js"></script>
+        <script src="src/auth/login.js" defer></script>
+        <script src="src/user.auth/registrate.js" defer></script>
     </body>
 </html>
 

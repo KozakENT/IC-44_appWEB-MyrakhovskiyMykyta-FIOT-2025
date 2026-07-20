@@ -1,3 +1,5 @@
+var  BASE_URL = 'https://premortuary-garnett-nonevolving.ngrok-free.dev';
+
 document.addEventListener("DOMContentLoaded", () => {
     showAmountInCart()
 
@@ -72,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function createCart(productId) {
     const token = localStorage.getItem("token");
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart/${productId}`, {
+    fetch(`${BASE_URL}/api/products/cart/${productId}`, {
         method: 'POST',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -95,7 +97,7 @@ function createCart(productId) {
 function removeFromCart(productId) {
     const token = localStorage.getItem("token");
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart/${productId}`, {
+    fetch(`${BASE_URL}/api/products/cart/${productId}`, {
         method: 'DELETE',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -118,7 +120,7 @@ function removeFromCart(productId) {
 function showCart() {
     const token = localStorage.getItem("token");
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart`, {
+    fetch(`${BASE_URL}/api/products/cart`, {
         method: 'GET',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -138,7 +140,7 @@ function showCart() {
         }
 
         for (const [productId, quantity] of entries) {
-            const product = await fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/${productId}`, {
+            const product = await fetch(`${BASE_URL}/api/products/${productId}`, {
                 headers: {
                     "ngrok-skip-browser-warning": "true"
                 }
@@ -177,7 +179,7 @@ function showCart() {
 function showAmountInCart() {
     const token = localStorage.getItem("token");
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart`, {
+    fetch(`${BASE_URL}/api/products/cart`, {
         method: 'GET',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -193,7 +195,7 @@ function showAmountInCart() {
         if (entries.length != 0) {
             const totalCount = Object.values(data).reduce((sum, qty) => sum + Number(qty), 0);
             span.textContent = `${totalCount}`;
-            span.style.display = 'block';
+            span.style.display = 'flex';
         }
     });
 }
@@ -201,7 +203,7 @@ function showAmountInCart() {
 function finalPrice() {
     const token = localStorage.getItem("token");
 
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/cart`, {
+    fetch(`${BASE_URL}/api/products/cart`, {
         method: 'GET',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -214,7 +216,7 @@ function finalPrice() {
         let total = 0;
 
         for (const [productId, quantity] of entries) {
-            const product = await fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/${productId}`, {
+            const product = await fetch(`${BASE_URL}/api/products/${productId}`, {
                 headers: {
                     "ngrok-skip-browser-warning": "true"
                 }
@@ -234,3 +236,19 @@ function finalPrice() {
     })
 }
 
+function buttonBuyClick(productId) {
+    fetch(`${BASE_URL}/api/products/buy/${productId}`, {
+        method: 'POST',
+        headers: {
+            "ngrok-skip-browser-warning": "true"
+        }
+    })
+    .then(res => res.json())
+    .then(productId => {
+        console.log("Клік на продукт пораховано:", productId);
+    })
+    .catch(err => {
+        console.error("Fetch error:", err);
+        alert("Помилка при рахуванні кліку на продукт!");
+    });
+}

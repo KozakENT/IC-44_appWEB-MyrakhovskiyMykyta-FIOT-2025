@@ -1,3 +1,5 @@
+var  BASE_URL = 'https://premortuary-garnett-nonevolving.ngrok-free.dev';
+
 document.addEventListener('DOMContentLoaded', () => {
     readProduct();
     priceGlider();
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function readProduct() {
-    fetch('https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products', {
+    fetch(`${BASE_URL}/api/products`, {
         method: 'GET',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -40,7 +42,7 @@ function readProduct() {
     })
     .then(res => res.json())
     .then(products => {
-        displayProducts(products);
+        displayProductsTo(products, 'products-table');
         displayCategory(products);
         categoryAmount(products);
         console.log("Продукти отримано:", products);
@@ -51,8 +53,8 @@ function readProduct() {
     });
 }
 
-function displayProducts(products) {
-    const grid = document.getElementById('products-table');
+function displayProductsTo(products, containerId) {
+    const grid = document.getElementById(containerId);
     
     // Очищаємо попередні дані
     grid.innerHTML = '';
@@ -152,7 +154,7 @@ function displayCategory(products) {
 }
 
 function getSorted(sortType) {
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/sort/${sortType}`, {
+    fetch(`${BASE_URL}/api/products/sort/${sortType}`, {
         method: 'GET',
         headers: {
             "ngrok-skip-browser-warning": "true",
@@ -161,7 +163,7 @@ function getSorted(sortType) {
     })
     .then(res => res.json())
     .then(products => {
-        displayProducts(products);
+        displayProductsTo(products, 'products-table');
         console.log("Продукти відсортовано:", products);
     })
     .catch(err => {
@@ -171,7 +173,7 @@ function getSorted(sortType) {
 }
 
 function searchBy(inputContent) {
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/search/${encodeURIComponent(inputContent)}`, {
+    fetch(`${BASE_URL}/api/products/search/${encodeURIComponent(inputContent)}`, {
         method: 'GET',
     headers: {
             "ngrok-skip-browser-warning": "true",
@@ -180,7 +182,7 @@ function searchBy(inputContent) {
     })
     .then(res => res.json())
     .then(products => {
-        displayProducts(products);
+        displayProductsTo(products, 'products-table');
         console.log("Продукти відсортовано:", products);
     })
     .catch(err => {
@@ -190,7 +192,7 @@ function searchBy(inputContent) {
 }
 
 function sortByPriceSlider(minvalue, maxvalue) {
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/price/${minvalue}-${maxvalue}`, {
+    fetch(`${BASE_URL}/api/products/price/${minvalue}-${maxvalue}`, {
         method: 'GET',
     headers: {
             "ngrok-skip-browser-warning": "true",
@@ -199,29 +201,12 @@ function sortByPriceSlider(minvalue, maxvalue) {
     })
     .then(res => res.json())
     .then(products => {
-        displayProducts(products);
+        displayProductsTo(products, 'products-table');
         console.log("Продукти відсортовано:", products);
     })
     .catch(err => {
         console.error("Fetch error:", err);
         alert("Помилка при сортуванні продуктів!");
-    });
-}
-
-function buttonBuyClick(productId) {
-    fetch(`https://premortuary-garnett-nonevolving.ngrok-free.dev/api/products/buy/${productId}`, {
-        method: 'POST',
-        headers: {
-            "ngrok-skip-browser-warning": "true"
-        }
-    })
-    .then(res => res.json())
-    .then(productId => {
-        console.log("Клік на продукт пораховано:", productId);
-    })
-    .catch(err => {
-        console.error("Fetch error:", err);
-        alert("Помилка при рахуванні кліку на продукт!");
     });
 }
 
