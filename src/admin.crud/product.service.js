@@ -192,12 +192,6 @@ export class ProductService {
         return result;
     }
 
-    async delFromCart(userId, productId) {
-        const result = await client.hDel(`cart:${userId}`, productId)
-
-        return result;
-    }
-
     async removeFromCart(userId, productId) {
         const result = await client.hIncrBy(`cart:${userId}`, productId, -1)
         if (result === 0) { await client.hDel (`cart:${userId}`, productId) }

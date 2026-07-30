@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener('click', (e) => {
-        const button = e.target.closest('#make-order');
+        const button = e.target.closest('#redirect-to-checkout');
         if (button) {
             location.href = 'checkout.html'
         }
@@ -84,7 +84,17 @@ function createCart(productId) {
     .then(res => res.json())
     .then(data => {
         console.log("Додано до кошику:", data);
-        showCart();
+        
+        if (document.getElementById('cart-table-body')) {
+            const btn = document.querySelector(`[data-product-id="${productId}"]`)
+            const tr = btn.closest('tr');
+
+            const counterSpan = tr.querySelector('.counter span');
+            counterSpan.textContent = data;
+            const price = tr.dataset.price;
+            tr.querySelector('td b').textContent = price * data + " грн";
+        }
+
         finalPrice();
         showAmountInCart()
     })
@@ -107,7 +117,20 @@ function removeFromCart(productId) {
     .then(res => res.json())
     .then(data => {
         console.log("Зменшено на один товар:", data);
-        showCart();
+
+        const btn = document.querySelector(`[data-product-id="${productId}"]`)
+        const tr = btn.closest('tr');
+
+        if (data <= 0) {
+            tr.remove();
+        }
+        else {
+            const counterSpan = tr.querySelector('.counter span');
+            counterSpan.textContent = data;
+            const price = tr.dataset.price;
+            tr.querySelector('td b').textContent = price * data + " грн";
+        }
+
         finalPrice();
         showAmountInCart()
     })
@@ -116,6 +139,7 @@ function removeFromCart(productId) {
         alert("Помилка при зменшенні!");
     })
 }
+
 
 function showCart() {
     const token = localStorage.getItem("token");
@@ -154,15 +178,16 @@ function showCart() {
             }
 
             const card = document.createElement('tr');
+            card.dataset.price = newPrice;
             card.innerHTML = `
-                <td><img class="image-td" src="${product.ProductPhoto}" alt="${product.ProductName}"></td>
+                    <td><img class="image-td" src="${product.ProductPhoto}" alt="${product.ProductName}"></td>
                     <td class="text-td">
                         <h2>${product.ProductName}</h2>
                         <span>${product.ProductDiscountPercent > 0 ? `<span class="product-old-price"><s>${product.ProductCost} грн/кг</s></span>` : ``}
                         ${newPrice} грн/кг
                         </span>
                     </td> 
-                    <td>
+                    <td class="text-center">
                         <div class="counter">
                             <button data-product-id="${product.ProductId}" class="btn de-increment">-</button>
                             <span>${quantity}</span>

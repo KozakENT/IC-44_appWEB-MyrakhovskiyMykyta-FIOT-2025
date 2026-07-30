@@ -30,6 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
         sortByPriceSlider(minvalue, maxvalue);
     });
     
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.checkbox-wrap')) {
+            document.querySelectorAll('.checkbox-wrap.active').forEach(card => {
+            card.classList.remove('active');
+            
+            const icon = card.querySelector('.js-checkbox-icon');
+            if (icon) {
+                icon.classList.remove('fa-square-check');
+                icon.classList.add('fa-square');
+            }
+            readProduct()
+        });
+        }
+    })
 });
 
 function readProduct() {
@@ -141,11 +155,18 @@ function displayCategory(products) {
             e.preventDefault();
 
             const icon = categoryCard.querySelector('.js-checkbox-icon');
+            const isActive = categoryCard.classList.contains('active');
             icon.classList.toggle('fa-square');
             icon.classList.toggle('fa-square-check');
             
             categoryCard.classList.toggle('active');
-            filterByCategory();
+
+            if (isActive) {
+                readProduct();
+            }
+            else {
+                searchBy(categoryCard.dataset.category);
+            }
         })
 
         categoryGrid.appendChild(categoryCard);

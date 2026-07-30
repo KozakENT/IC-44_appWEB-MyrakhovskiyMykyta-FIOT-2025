@@ -13,13 +13,7 @@
     </head>
 <body>
     <header class="header flex-center">
-        <div class="top-row flex-center">
-            <div id="textlogo-mobile"class="nav-item">
-                <h4>OnlyFresh</h4>
-            </div>
-        </div>
-
-        <div class="under-row flex-center">
+        <div class="checkout-row under-row flex-center">
             <div class="logo-container flex-center">
                 <img src="/images/logo.png" alt="Лого.png" class="logo"/>
             </div>
@@ -72,12 +66,14 @@
                         </div>
                     </div> 
                 </li>
+                <p data-input="valid">Оберіть місце доставки!</p>
             </ul>
 
             <h2>Спосіб оплати</h2>
-            <ul class="payment-ul">
+            <ul class="payment-ul" data-input="valid">
                 <li>Оплатити карткою зараз</li>
                 <li>Оплатити готівкою при отриманні</li>
+                <p data-input="valid">Оберіть спосіб оплати!</p>
             </ul>
 
             <h2>Отримувач</h2>
@@ -106,20 +102,20 @@
             <hr>
 
             <span>
-                <p>До сплати:</p>
+                <h3>До сплати</h3>
                 <p id="sum-price"></p>
             </span>
 
             <hr>
 
             <button class="btn make-order">
-                <span id="make-order">Підтвердити замовлення</span>
+                <span>Підтвердити замовлення</span>
             </button>
             
-            <p> Підтверджуючи замовлення, я приймаю умови:
+            <p> Підтверджуючи замовлення, Ви приймаєте умови:
                 <ul>
-                    <li>положення про обробку і захист персональних даних</li>
-                    <li>угоди користувача</li>
+                    <li><em>положення про обробку і захист персональних даних</em></li>
+                    <li><em>угоди користувача</em></li>
                 </ul>
             </p>
         </div>

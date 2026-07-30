@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    let deliveryChoosed = false;
     // Вибір 
     document.addEventListener('click', (e) => {
         const deliveryAddress = e.target.closest('.branches-ul li');
@@ -24,6 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!deliveryAddress) return;
 
+        const error = document.querySelector('.delivery-ul p');
+        error.dataset.input = "valid";
+        deliveryChoosed = true;
         saveDeliveryPlace(deliveryAddress.textContent);
         openDelivery.textContent = deliveryAddress.textContent;
         finalDelivery.textContent = deliveryAddress.textContent;
@@ -46,15 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else {
             openDelivery.classList.remove('active');
+            const error = document.querySelector('.delivery-ul p');
+            error.dataset.input = "valid";
+            deliveryChoosed = true;
             saveDeliveryPlace("Самовивіз зі складу");
             const finalDelivery = document.getElementById('final-delivery')
             finalDelivery.textContent = "Самовивіз зі складу";
         }
     })
 
+    let paymentChoosed = false;
     // Вибір способу оплати
     document.addEventListener('click', (e) => {
         const li = e.target.closest('.payment-ul li');
+        const error = document.querySelector('.payment-ul p');
         if (!li) return;
 
         li.closest('ul').querySelectorAll('li').forEach(el => {
@@ -62,17 +71,45 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.remove('active');
         })
         li.classList.add('active');
+        error.dataset.input = "valid";
 
+        paymentChoosed = true;
         savePaymentType(li.textContent.trim());
     })
 
     document.addEventListener('click', async (e) => {
+        e.preventDefault();
         const purchaseBtn = e.target.closest('.make-order')
         if (!purchaseBtn) return;
-        e.preventDefault();
-        console.log('button clicked');
-        console.log(typeof liqpayRedirect);
-        await liqpayRedirect();
+        try {
+            if (deliveryChoosed === false) {
+                throw new Error("Delivery not choosed");
+            }
+            if (paymentChoosed === false) {
+                throw new Error("PaymentType not choosed")
+            }
+            await liqpayRedirect();
+        }
+        catch (err) {
+            if (err.message === "Delivery not choosed") {
+                var delivery = document.querySelector('.delivery-ul');
+                var errorParagraph = document.querySelector('.delivery-ul p');
+                delivery.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                })
+                errorParagraph.dataset.input = "invalid";
+            }
+            if (err.message === "PaymentType not choosed") {
+                var payment = document.querySelector('.payment-ul');
+                var errorParagraph = document.querySelector('.payment-ul p');
+                payment.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                })
+                errorParagraph.dataset.input = "invalid";
+            }
+        }
     })
 })
 
