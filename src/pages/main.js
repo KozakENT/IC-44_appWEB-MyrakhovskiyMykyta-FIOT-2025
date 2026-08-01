@@ -1,8 +1,12 @@
 var  BASE_URL = 'https://premortuary-garnett-nonevolving.ngrok-free.dev';
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadTopsale()
-    loadDiscountOnly()
+    if (document.getElementById('topsale-table')) {
+        loadTopsale()
+    }
+    if (document.getElementById('discount-table')) {
+        loadDiscountOnly()
+    }
 
     const burgerMenu = document.querySelector('.burger-menu');
     const nav = document.querySelector('.nav');
@@ -12,6 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
     burgerMenu.addEventListener('click', () => {
         burgerMenu.classList.toggle('open');
     })
+
+    const navCloseBtn = document.querySelector('.nav-mobile-close');
+    navCloseBtn.addEventListener('click', () => {
+        nav.classList.remove('open');
+    })
+
 
     // Відкриття/закриття авторизації і реєстрації
     document.addEventListener('click', (e) => {
@@ -35,6 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
             loginWrap.style.display = 'flex';
             loginPopUp.style.display = 'flex';
         }
+    }
+
+    // После success редиректа
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('order');
+    if (orderId) {
+        alert(`Замовлення успішно оформлено! Номер: ${orderId}`);
     }
 });
 })

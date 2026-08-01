@@ -21,16 +21,33 @@
     <header class="header flex-center">
         <div class="top-row flex-center">
             <nav class="nav">
-            <ul>
-                <li class="nav-item tr-color"><a href="catalog.html">Умови повернення</a></li>
-                <li class="nav-item tr-color"><a href="#delivery">Доставка і оплата</a></li>
-                <li class="nav-item tr-color"><a href="#about-us">Про нас</a></li>
-            </ul>
-            <div class="nav-item">
-                <a href="" class="user-container icon-size flex-center a-reset">
-                    <p>Особистий кабінет <i class="fa fa-user"></i></p>
-                </a>
-            </div>
+                <div class="mobile-hidden nav-mobile-close">
+                    <button class="btn"><i class="fa-solid fa-circle-xmark icon-size"></i></button>
+                </div>
+                <ul>
+                    <li class="nav-item tr-color"><a href="catalog.html">Умови повернення</a></li>
+                    <li class="nav-item tr-color"><a href="#delivery">Доставка і оплата</a></li>
+                    <li class="nav-item tr-color"><a href="#about-us">Про нас</a></li>
+                </ul>
+                <div class="nav-item">
+                    <a href="" class="user-container icon-size flex-center a-reset">
+                        <p>Особистий кабінет <i class="fa fa-user"></i></p>
+                    </a>
+                </div>
+                <div class="mobile-hidden shop flex-column">
+                    <h3>Магазин:</h3>
+                    <div class="flex-row">
+                        <i class="fa-solid fa-map-location-dot icon-size"></i>
+                        <h4 class="address">вулиця Адама Міцкевича, 2 Коломия, Івано-Франківська область, 78200</h4>
+                    </div>
+                </div>
+                <div class="mobile-hidden media">
+                    <h3>Наші соцмережі:</h3>
+                    <div class="social-media flex-row">
+                        <a href="https://www.instagram.com/"><img class="img-mini" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt=""></a>
+                        <a href=""><img class="img-mini" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Viber_logo_2018_%28without_text%29.svg/250px-Viber_logo_2018_%28without_text%29.svg.png" alt=""></a>
+                    </div>
+                </div>
             </nav>
         </div>
 
@@ -151,8 +168,8 @@
                     </div>
             
                     <h2>Рекомендуємо спробувати також:</h2>
-                    <div>
-                    <!-- Товари -->    
+                    <div class="products-grid topsale" id="topsale-table">
+                    <!-- Таблиця -->
                     </div>
                 </div>
     </section>

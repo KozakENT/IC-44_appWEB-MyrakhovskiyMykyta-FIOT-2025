@@ -6,6 +6,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.3",
+    "liqpay": "^0.0.1",
     "mssql": "^12.1.0",
     "redis": "^5.11.0"
   }

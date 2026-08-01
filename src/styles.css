@@ -39,6 +39,10 @@
     height: 3rem;
 }
 
+.mobile-hidden {
+    display: none;
+}
+
 html {
     font-size: 100%;
 }
@@ -398,10 +402,10 @@ input {
 
 .login-wrap, .registrate-wrap {
     position: fixed;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60%;
+    width: 70%;
     height: fit-content;
     overflow-y: auto;
     background: white;
@@ -460,7 +464,7 @@ input {
     }
     .nav {
         display: none;
-        width: 350px;
+        width: 85vw;
         background: #79B3FF;
     }
     .nav.open {
@@ -470,16 +474,32 @@ input {
         display: block;
         max-height: none;
         height: 100vh;
+        z-index: 1000;
+        overflow-y: hidden;
+        padding-left: 1rem;
+        color: white;
+    }
+    .nav-mobile-close {
+        display: flex;
+        padding: 0.5rem 0.5rem 0 0.5rem;
+        justify-content: flex-end;
     }
     .nav ul {
         flex-direction: column;
         gap: 1rem;
+        margin: 0;
     }
     .nav ul:first-child {
         margin-top: 1rem;
     }
     .nav-item p {
-        margin: 1rem 0 0 30px;
+        margin-top: 1rem;
+    }
+    .nav .media {
+        display: block;
+    }
+    .nav .shop {
+        display: block;
     }
     .logo-container {
         order: 1;
@@ -830,6 +850,8 @@ input[type="number"]::-webkit-inner-spin-button {
     justify-content: center;
     text-align: center;
     font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 
 .pop-up-overlay {
@@ -1161,8 +1183,16 @@ tbody .counter button {
     .dropbtn {
         margin: 0;
         height: 30px;
-        width: 100px;
+        width: 110px;
         font-size: 10px;
+        align-items: center;
+        display: flex;
+        gap: 4px;
+        margin-left: 2rem;
+        justify-content: center;
+    }
+    .dropdown-content.open {
+        margin-left: 2rem;
     }
     .dropdown-content.open > .optionbtn {
         padding: 5px 10px;

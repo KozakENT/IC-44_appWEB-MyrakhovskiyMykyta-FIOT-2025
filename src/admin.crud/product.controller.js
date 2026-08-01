@@ -185,7 +185,7 @@ export const savePaymentType = async (req, res) => {
 }
 
 export const checkoutSuccess = async (req, res) => { 
-    window.location.href("")
+    res.redirect(`/index.html?order=${req.query.order_id}`);
 }
 
 export const checkoutCallback = async (req, res) => {

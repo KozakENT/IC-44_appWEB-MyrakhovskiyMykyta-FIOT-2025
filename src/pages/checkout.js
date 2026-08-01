@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
     createDeliveryUl();
     userInfo();
 
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.go-back-arrow')
+        if (btn) {
+            location.replace('catalog.html');
+        }
+    })
     // Закриття/відкриття дропдауну
     document.addEventListener('click', (e) => {
         const dropdown = document.querySelector('.dropdown-content');

@@ -44,6 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const button = e.target.closest('.to-cart-button');
 
     if (button) {
+        const token = localStorage.getItem("token");
+
+        if (!token || !isTokenValid(token)) {
+            
+            return;
+        }
+
         e.preventDefault();
         // ID з атрибута id кнопки, прибрав префікс "data-button-"
         const productId = button.id.replace('data-button-', '');
@@ -74,6 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
 function createCart(productId) {
     const token = localStorage.getItem("token");
 
+    if (!token || !isTokenValid(token)) {
+        
+        return;
+    }
+
     fetch(`${BASE_URL}/api/products/cart/${productId}`, {
         method: 'POST',
         headers: {
@@ -87,12 +99,14 @@ function createCart(productId) {
         
         if (document.getElementById('cart-table-body')) {
             const btn = document.querySelector(`[data-product-id="${productId}"]`)
-            const tr = btn.closest('tr');
+            if (btn) {
+                const tr = btn.closest('tr');
 
-            const counterSpan = tr.querySelector('.counter span');
-            counterSpan.textContent = data;
-            const price = tr.dataset.price;
-            tr.querySelector('td b').textContent = price * data + " грн";
+                const counterSpan = tr.querySelector('.counter span');
+                counterSpan.textContent = data;
+                const price = tr.dataset.price;
+                tr.querySelector('td b').textContent = price * data + " грн";
+            }
         }
 
         finalPrice();
@@ -140,9 +154,25 @@ function removeFromCart(productId) {
     })
 }
 
+function isTokenValid(token) {
+    if (!token) return false;
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.exp * 1000 > Date.now();
+}
 
 function showCart() {
     const token = localStorage.getItem("token");
+
+    if (!token || !isTokenValid(token)) {
+        const amountInCart = document.querySelector('.amount-display');
+        if (amountInCart) amountInCart.style.display = 'none';
+
+        const grid = document.getElementById('cart-table-body');
+        if (grid) {
+            grid.innerHTML = '<p class="text-td without-products">Увійдіть в акаунт щоб використати кошик</p>';
+        }
+        return;
+    }
 
     fetch(`${BASE_URL}/api/products/cart`, {
         method: 'GET',
@@ -204,6 +234,13 @@ function showCart() {
 function showAmountInCart() {
     const token = localStorage.getItem("token");
 
+    if (!token || !isTokenValid(token)) {
+        const amountInCart = document.querySelector('.amount-display');
+        if (amountInCart) amountInCart.style.display = 'none';
+
+        return;
+    }
+
     fetch(`${BASE_URL}/api/products/cart`, {
         method: 'GET',
         headers: {
@@ -227,6 +264,17 @@ function showAmountInCart() {
 
 function finalPrice() {
     const token = localStorage.getItem("token");
+
+    if (!token || !isTokenValid(token)) {
+        const cost = document.getElementById('sum-price');
+        if (cost) cost.textContent = '-';
+
+        const grid = document.getElementById('cart-table-body');
+        if (grid) {
+            grid.innerHTML = '<p class="text-td without-products">Увійдіть в акаунт щоб використати кошик</p>';
+        }
+        return;
+    }
 
     fetch(`${BASE_URL}/api/products/cart`, {
         method: 'GET',
